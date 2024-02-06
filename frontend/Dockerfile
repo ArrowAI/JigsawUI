@@ -5,6 +5,8 @@ COPY . /app
 RUN npm install
 RUN npm install -g @angular/cli@latest
 RUN  ng build   --build-optimizer=false --output-path=dist
+RUN ls -la /app/dist
+RUN echo "hello world"
 
 
 FROM nginx:1.17-alpine
