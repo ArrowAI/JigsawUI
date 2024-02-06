@@ -1,0 +1,13 @@
+:host {
+    width: 100%;
+    .kt-header-menu-wrapper {
+        height: 100%;
+    }
+}
+
+.list-group {
+    max-height: 100vh;
+    margin-bottom: 10px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "site": "cloudarrowai",
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+    
+  }
+}

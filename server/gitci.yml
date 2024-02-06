@@ -1,0 +1,63 @@
+# apiserver-build:
+#   image: node:latest
+#   stage: build
+#   script:
+#     - PROJECT_NAME=apiserver
+#     - TAG_ID=1.0.0
+#     - npx turbo run build --filter=$PROJECT_NAME --no-cache
+#     - |
+#       release_asset_url="https://gitlab.com/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/download?file_type=archive"
+#       release_description="Release for"
+#       release_assets_link="[{\"name\": \"Build Artifacts\", \"type\": \"other\", \"url\": \"$release_asset_url\"}]"
+#       ./release-cli create --name "$PROJECT_NAME-$TAG_ID" --tag-name "$TAG_ID" --description "$release_description" --assets-link "$release_assets_link"
+#   artifacts:
+#     paths:
+#       - apps/apiserver/*
+
+# apiserver-deploy:
+#   stage: deploy
+#   script:
+#     - echo 'Deploying apiserver'
+
+
+apiserver-build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay2
+    IMAGE_TAG: registry.gitlab.com/$CI_PROJECT_PATH/apiserver:$CI_JOB_ID
+
+  before_script:
+    - docker ps
+    - docker images
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+  script:
+    - cd backend/apiserver
+    - echo "RELEASE_VERSION=$CI_JOB_ID" >> release.env
+    - echo "DOCKER_REGISTRY_URL=$IMAGE_TAG" >> release.env
+    - echo "DATE"=$(date +"%d/%m/%Y-%H:%M%p") >> release.env
+    - docker build -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  artifacts:
+    reports:
+      dotenv: backend/apiserver/release.env
+
+apiserver-update-version:
+  stage: deploy
+  variables:
+    NEW_VERSION: $RELEASE_VERSION
+    NEW_DOCKER_REGISTRY_URL: "$DOCKER_REGISTRY_URL"
+  script:
+    - source deploy_repo_pull.sh
+    - source deploy_repo_push.sh
+    - deploy_repo_pull
+    - |
+        yq e -i ".apiserver.versions = (.apiserver.versions + [{\"version\": \"$NEW_VERSION\", \"artifact_path\": \"$NEW_DOCKER_REGISTRY_URL\", \"updatedDateTime\": \"$DATE\"}])" allappversions.yaml
+        yq e -i ".spec.template.spec.containers[0].image = \"$NEW_DOCKER_REGISTRY_URL\"" kubernetes/apiserver/deployment.yaml
+    - deploy_repo_push
+  needs:
+    job: apiserver-build
+    artifacts: true

@@ -1,0 +1,21 @@
+:host {
+	::ng-deep {
+		ngb-tabset > .nav-tabs {
+			display: none;
+		}
+		.badge {
+			position: relative;
+			background-color: red;
+			color: white;
+			width: 9px;
+			text-align: center;
+			padding-right: 11px;
+			top: -16px;
+			font-weight: bold;
+			padding-left: 7px;
+			left: -15px;
+			border-radius: 50%;
+        }
+	}
+}
+

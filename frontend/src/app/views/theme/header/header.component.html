@@ -1,0 +1,26 @@
+<!-- begin: Header -->
+<div ktHeader #ktHeader class="kt-header kt-grid__item" [ngClass]="htmlClassService.getClasses('header', true)" id="kt_header">
+    <ngb-progressbar class="kt-loading-bar" *ngIf="(loader.progress$|async) > 0" [value]="loader.progress$|async" height="3px"></ngb-progressbar>
+    <!-- begin: Header Menu -->
+    <div *ngIf="selectedBot$ | async as _bot">
+        <div style="margin-top: 30px;padding-left: 15px;">
+            <!-- {{_user|json}} -->
+
+            <span class="menu-text"> <strong>{{_bot.name | slice:0:8}} </strong> </span>
+
+
+        </div>
+    </div>
+    <kt-subheader3  [fluid]="fluid" [clear]="clear"></kt-subheader3>
+
+    <kt-menu-horizontal ></kt-menu-horizontal>
+    <!-- end: Header Menu -->
+
+    <!-- begin:: Header Topbar -->
+    <!-- empty div to fix topbar to stay on the right when menu-horizontal is hidden -->
+    <div *ngIf="!menuHeaderDisplay"></div>
+    
+    <kt-topbar [applicationId]="applicationId"></kt-topbar>
+    <!-- end:: Header Topbar -->
+</div>
+<!-- end: Header -->

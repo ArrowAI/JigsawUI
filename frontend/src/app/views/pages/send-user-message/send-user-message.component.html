@@ -1,0 +1,416 @@
+<div class="kt-portlet">
+    <!-- [ngClass]="{ 'kt-portlet--body-progress kt-portlet--body-progress-overlay' : viewLoading }" -->
+    <div class="kt-portlet__head kt-portlet__head__custom">
+        <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">Send To User</h3>
+        </div>
+    </div>
+    <form class="kt-form">
+        <div class="kt-portlet__body">
+
+            <div class="kt-portlet__body-progress">
+                <mat-spinner [diameter]="20"></mat-spinner>
+            </div>
+
+            <kt-alert *ngIf="false" type="warn" [duration]="30000" [showCloseButton]="true" (close)="onAlertClose($event)">
+                Oh snap! Change a few things up and try submitting again.
+            </kt-alert>
+
+
+
+            <div class="kt-widget__body">
+
+                <mat-form-field class="demo-chip-list">
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let user of campaign.who.users" [selectable]="selectable" [removable]="removable" (removed)="remove(user)">
+                            {{user.name || user.data.name}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Select From User..." #userInput [formControl]="userCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)"
+                        />
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                        <ng-container *ngIf="!isLoading">
+                            <mat-option *ngFor="let user of filteredUser | async; let index = index" [value]="user._id">
+                                {{ user.data.name}}
+                            </mat-option>
+                        </ng-container>
+
+                    </mat-autocomplete>
+                </mat-form-field>
+
+
+                <mat-form-field class="demo-chip-list">
+
+                    <mat-label>Integration</mat-label>
+                    <select [(ngModel)]="campaign.integrationId" name="integration" matNativeControl required>
+                                  <option *ngFor="let integration of allAddedIntegration"
+                                   [value]="integration.integrationKey"> {{integration.name}} ({{integration.type}})</option>
+                                 
+                                 
+                                </select>
+                </mat-form-field>
+
+
+
+
+                <mat-form-field class="demo-chip-list">
+                    <mat-label>Component Type</mat-label>
+                    <select matNativeControl required (change)='selectComponent($event)'>
+                                <option value="" >Select component Type</option>
+                                      <option *ngFor="let type of componentType"
+                                       [value]="type">{{type}} </option>
+                                     
+                                     
+                                    </select>
+                </mat-form-field>
+                <div class="row" *ngIf="campaign.what.component=='Text'" style="margin:10px">
+                    <div class="col-md-12">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <div class="form-group ">
+                            <label class="kt-heading kt-heading--md" for="exampleTextarea">Message </label>
+                            <textarea [(ngModel)]="campaign.what.text" class="form-control" name="exampleTextarea" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="campaign.what.component=='List'">
+                    <div class="col-xl-6" *ngFor="let list of campaign.what.list; index as i ">
+                        <a (click)="removeComponent(i,'list')">
+                                        <i class="flaticon2-cross   pull-right" *ngIf="i>0" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a>
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Message </label>
+                                            <textarea name="description{{i}}" [(ngModel)]="campaign.what.list[i].description" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input name="title{{i}}" [(ngModel)]="campaign.what.list[i].title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Url </label>
+                                            <input name="url{{i}}" [(ngModel)]="campaign.what.list[i].url" class="form-control" placeholder="Image Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer text-center">
+                                        <div class="kt-widget__wrapper">
+                                            <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!-- {{}} -->
+                        <div class="kt-widget__footer text-center" *ngIf="campaign.what.list.length-1==i">
+                            <div class="kt-widget__wrapper">
+                                <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" (click)="addMore('list')">Add More</button>
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+
+                </div>
+                <div class="row" style="margin:25px" *ngIf="campaign.what.component=='Card'">
+                    <div class="col-xl-6" *ngFor="let list of campaign.what.card; index as i">
+                        <a (click)="removeComponent(i,'card')">
+                                        <i class="flaticon2-cross   pull-right" *ngIf="i>0" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a>
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Message </label>
+                                            <textarea name="description{{i}}" [(ngModel)]="campaign.what.card[i].description" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input name="title{{i}}" [(ngModel)]="campaign.what.card[i].title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Url </label>
+                                            <input name="url{{i}}" [(ngModel)]="campaign.what.card[i].name" class="form-control" placeholder="Image Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <div class="kt-widget__footer text-center" *ngIf="campaign.what.card.length-1==i">
+                            <div class="kt-widget__wrapper">
+                                <button type="button" class="btn  btn-primary btn-sm" data-toggle="modal" (click)="addMore('card')">Add More</button>
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="(campaign.what.component=='Image' && campaign.channel!='whatsApp')">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.image.title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Image Url </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.image.name" class="form-control" placeholder="Image Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="(campaign.what.component=='Image' && campaign.channel=='whatsApp')">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.image.title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Image Url </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.image.url" class="form-control" placeholder="Image Url">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Or Upload Video </label>
+                                            <input type="file" [(ngModel)]="campaign.what.image.name" class="form-control" placeholder="Video Url">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="(campaign.what.component=='Video' && campaign.channel!='whatsApp')">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [(ngModel)]="campaign.what.video.title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Video Url </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.video.url" class="form-control" placeholder="Video Url">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Or Upload Video </label>
+                                            <input type="file" [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.video.name" class="form-control" placeholder="Video Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <!-- <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="(campaign.what.component=='Video' && campaign.channel=='whatsApp')">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [(ngModel)]="campaign.what.video.title" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Video Url </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.video.url" class="form-control" placeholder="Video Url">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Or Upload Video </label>
+                                            <input type="file" [(ngModel)]="campaign.what.video.name" class="form-control" placeholder="Video Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <!-- <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="campaign.what.component=='Audio'">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [(ngModel)]="campaign.what.audio.title" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Audio Url </label>
+                                            <input name="audioUrl" [(ngModel)]="campaign.what.audio.url" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Audio Url">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Or Upload Audio </label>
+                                            <input type="file" [(ngModel)]="campaign.what.audio.name" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Video Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <!-- <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+                <div class="row" style="margin:25px" *ngIf="campaign.what.component=='Document'">
+                    <div class="col-xl-6">
+                        <!-- <a (click)="removeFilter(i)">
+                                        <i class="flaticon2-cross   pull-right" style="color: red ;margin-left: 10px" role="button" tabindex="0"></i>
+                                    </a> -->
+                        <!--begin:: Portlet-->
+                        <div class="kt-portlet kt-portlet--height-fluid">
+                            <div class="kt-portlet__body kt-portlet__body--fit">
+                                <!--begin::Widget -->
+                                <div class="kt-widget kt-widget--project-1">
+                                    <div class="kt-widget__head">
+                                    </div>
+                                    <div class="kt-widget__body">
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Title </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.document.title" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Title">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Document Url </label>
+                                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.document.url" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Video Url">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="exampleTextarea">Or Upload Document </label>
+                                            <input type="file" [ngModelOptions]="{standalone: true}" [(ngModel)]="campaign.what.document.name" class="form-control" placeholder="Video Url">
+                                        </div>
+                                    </div>
+                                    <div class="kt-widget__footer">
+                                        <div class="kt-widget__wrapper">
+                                            <!-- <button type="button" class="btn  btn-label-brand btn-sm" data-toggle="modal" (click)="addButton()">Add Button</button> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Widget -->
+                            </div>
+                        </div>
+                        <!--end:: Portlet-->
+                    </div>
+                </div>
+
+
+
+
+
+
+                <!-- Copyright 2018 Google Inc. All Rights Reserved.
+                      Use of this source code is governed by an MIT-style license that
+                      can be found in the LICENSE file at http://angular.io/license -->
+            </div>
+
+        </div>
+        <div class="kt-portlet__foot kt-portlet__no-border kt-portlet__foot--fit">
+            <div class="kt-form__actions kt-form__actions--solid">
+                <div class="row text-right">
+                    <div class="col-lg-12">
+                        <button type="button" mat-raised-button [mat-dialog-close]="" cdkFocusInitial matTooltip="Cancel changes">
+                                  Cancel
+                              </button>&nbsp;
+                        <button type="button" (click)="sendMessage()" mat-raised-button color="primary" matTooltip="Save changes">
+                                  Send
+                              </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

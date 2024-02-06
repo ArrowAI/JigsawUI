@@ -1,0 +1,93 @@
+
+# frontend-build:
+#   image: node:latest
+#   stage: build
+#   script:
+#     - PROJECT_NAME=frontend
+#     - TAG_ID=1.0.0
+#     - npx turbo run build --filter=$PROJECT_NAME --no-cache
+#     - |
+#       release_asset_url="https://gitlab.com/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/download?file_type=archive"
+#       release_description="Release for"
+#       release_assets_link="[{\"name\": \"Build Artifacts\", \"type\": \"other\", \"url\": \"$release_asset_url\"}]"
+#       ./release-cli create --name "$PROJECT_NAME-$TAG_ID" --tag-name "$TAG_ID" --description "$release_description" --assets-link "$release_assets_link"
+#   artifacts:
+#     paths:
+#       - apps/frontend/*
+
+# frontend-deploy:
+#   stage: deploy
+#   script:
+#     - echo 'Deploying frontend'
+
+frontend-build:
+  stage: build
+  # cache:
+  #   paths:
+  #     - ~/.pnpm-store
+  script:
+    - PROJECT_NAME=frontend
+    - TAG_ID=$CI_JOB_ID
+    - apt-get install -y openssl
+    - pnpm install --no-frozen-lockfile
+    - npx turbo run build --filter=$PROJECT_NAME --no-cache
+
+    - |
+      RELEASE_ASSET_URL="https://gitlab.com/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/download?file_type=archive"
+      echo "RELEASE_ASSET_URL=$RELEASE_ASSET_URL" >> release.env
+       echo "RELEASE_VERSION=$TAG_ID" >> release.env
+      release_description="Release for $PROJECT_NAME and Commit $CI_JOB_ID"
+      release_assets_link="[{\"name\": \"Build Artifacts\", \"type\": \"other\", \"url\": \"$RELEASE_ASSET_URL\"}]"
+      ./release-cli create --name "$PROJECT_NAME-$TAG_ID" --tag-name "$TAG_ID" --description "$release_description" --assets-link "$release_assets_link"
+  artifacts:
+    paths:
+      - apps/frontend/dist/*
+    reports:
+      dotenv: release.env
+
+# frontend-build-docker:
+#   image: docker:latest
+#   services:
+#     - docker:dind
+#   stage: additional
+#   dependencies:
+#     - frontend-build
+#   variables:
+#     DOCKER_DRIVER: overlay2
+#     IMAGE_TAG: registry.gitlab.com/$CI_PROJECT_PATH/frontend:$CI_JOB_ID
+#   before_script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#   script:    
+#     - cd apps/frontend
+#     - docker build -t $IMAGE_TAG .
+#     - docker push $IMAGE_TAG
+
+# frontend-update-version:
+#   stage: deploy
+#   variables:
+#     NEW_VERSION: $RELEASE_VERSION
+#     NEW_ARTIFACT_PATH: "$RELEASE_ASSET_URL"
+#   script:
+#     - source register_build_artifact.sh
+#     - register_build_artifact "$NEW_VERSION" "$NEW_ARTIFACT_PATH" "frontend" "apps/frontend/dist"
+#   needs:
+#     job: frontend-build
+#     artifacts: true
+
+
+frontend-update-dev:
+  stage: updatedev
+  variables:
+    NEW_VERSION: $RELEASE_VERSION
+    NEW_ARTIFACT_PATH: "$RELEASE_ASSET_URL"
+  script:
+    - source update_dev_artifact.sh
+    - update_dev_artifact "$NEW_VERSION" "$NEW_ARTIFACT_PATH" "frontend" "apps/frontend/dist"
+  needs:
+    job: frontend-build
+    artifacts: true    
+
+
+
+
+    

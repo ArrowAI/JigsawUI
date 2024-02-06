@@ -1,0 +1,15 @@
+<a href="#/external/module/chat-1211">
+<div class="kt-header__topbar-item kt-header__topbar-item--quick-panel" data-placement="bottom" ngbTooltip="Application Setting">
+
+	<span *ngIf="!_notification.length" class="kt-header__topbar-icon" style="background-color:rgba(77,89,149,0.06) ">
+		<i  class="fa fa-bell"></i>
+		
+
+	</span>
+	<span *ngIf="_notification.length"  class="kt-header__topbar-icon" style="background-color:rgba(77,89,149,0.06) ">
+		<i style="margin-left: 23px;" class="fa fa-bell"></i>
+		<span  class="badge badge-light">{{_notification.length}}</span>
+
+	</span>
+</div>
+</a>

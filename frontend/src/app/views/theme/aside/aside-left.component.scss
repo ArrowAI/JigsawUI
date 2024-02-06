@@ -1,0 +1,46 @@
+:host {
+    .kt-aside {
+        height: 100%;
+        .kt-aside-menu {
+            margin: 0;
+        }
+    }
+    // fixed text line break issue on minimized aside hover
+    .kt-menu__link-text {
+        white-space: nowrap;
+    }
+    span {
+        color: white;
+    }
+    .mat-select-value-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: white;
+    }
+    .mat-select-value {
+        display: table-cell;
+        max-width: 0;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: white
+    }
+     ::ng-deep .mat-select-placeholder {
+        color: white;
+        // padding-left: 20px
+    }
+     ::ng-deep .mat-select-arrow {
+        color: white
+    }
+     ::ng-deep .mat-select-value-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: white
+    }
+     ::ng-deep .mat-form-field-wrapper {
+        width: 100%
+    }
+}

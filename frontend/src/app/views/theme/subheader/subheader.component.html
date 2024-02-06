@@ -1,0 +1,10 @@
+<!-- <kt-subheader1 *ngIf="!layout || layout === 'subheader-v1'" [fluid]="fluid" [clear]="clear"></kt-subheader1>
+<kt-subheader2 *ngIf="layout === 'subheader-v2'" [fluid]="fluid" [clear]="clear"></kt-subheader2> -->
+
+
+<!-- <kt-subheader3 [fluid]="fluid" [clear]="clear"></kt-subheader3> -->
+
+<!-- begin:: Content Head -->
+<div class="kt-subheader kt-grid__item" [ngClass]="{'kt-container--clear': clear}" [hidden]="subheaderService.disabled$ | async" id="kt_subheader">
+    <kt-menu-horizontal></kt-menu-horizontal>
+</div>

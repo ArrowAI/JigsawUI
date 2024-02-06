@@ -1,0 +1,55 @@
+image: utkarshx/node-firebase-angular
+
+stages:
+  # - install
+  # - build
+  - staging
+  - production
+
+# cache:
+#   paths:
+#     - node_modules/
+
+# install:
+#   stage: install
+#   environment: Production
+#   only:
+#     - master
+#   script:
+#     - npm i -y yarn
+#     - yarn install
+
+# build:
+#   stage: build
+#   environment: Production
+#   only:
+#     - master
+#   artifacts:
+#     paths:
+#       - dist
+#   script:
+#     - export NODE_OPTIONS=--max_old_space_size=4096
+#     - npm run buildprod
+
+
+deploy_staging:
+  stage: staging
+  environment: Production
+  when: manual
+  only:
+    - master
+  script:
+    - mv staging-firebase.json firebase.json
+    - export GOOGLE_APPLICATION_CREDENTIALS="/builds/kubedeploy/frontendnew/arrowai-kubernetes-firebase-adminsdk-17pj6-969ab41d25.json"
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive
+
+deploy_production:
+  stage: production
+  environment: Production
+  when: manual
+  allow_failure: false
+  only:
+    - master
+  script:
+    - export GOOGLE_APPLICATION_CREDENTIALS="/builds/kubedeploy/frontendnew/arrowai-kubernetes-firebase-adminsdk-17pj6-969ab41d25.json"
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive

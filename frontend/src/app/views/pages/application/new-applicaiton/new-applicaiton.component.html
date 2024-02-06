@@ -1,0 +1,153 @@
+<style>
+    .mat-form-field-infix {
+        display: block;
+        position: relative;
+        flex: auto;
+        min-width: 0;
+        width: 680px;
+    }
+</style>
+<div class="row" *ngIf="showPage">
+    <div class="col-lg-12">
+        <div class="kt-portlet">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-caption">
+                    <div class="kt-portlet__head-title">
+                        <span class="kt-portlet__head-icon kt-hide">
+							<i class="la la-gear"></i>
+						</span>
+                        <h3 class="kt-portlet__head-text">
+                            Add Application
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <!--begin::Form-->
+            <form class="kt-form" [formGroup]="applicationForm">
+                <div class="kt-portlet__body">
+                    <div class="kt-form__section kt-form__section--first">
+                        <div class="form-group kt-form__group">
+
+                            <label class="col-lg-2 col-form-label">Name of Application:</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input formControlName="name" matInput placeholder="Enter full name">
+                                <mat-hint align="start">Enter Name of Application</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">Description (Optional):</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input formControlName="description" matInput placeholder="Description">
+                                <mat-hint align="start">Enter Description</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">Add Tag To Application:</label>
+                            <mat-form-field class="col-lg-9">
+                                <mat-chip-list #chipList aria-label="Fruit selection">
+                                    <mat-chip *ngFor="let tags of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tags)">
+                                        {{tags}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip>
+                                    <input placeholder="New Tag..." #tagsInput [formControl]="tagsCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    <mat-option *ngFor="let tags of filteredTags | async" [value]="tags">
+                                        {{tags}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                            <!-- <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input [(ngModel)]="application.tags" [ngModelOptions]="{standalone: true}" matInput placeholder="Enter full name">
+                                <mat-hint align="start">Enter Tag To Application</mat-hint>
+                            </mat-form-field> -->
+                        </div>
+
+                        <!-- <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">Bot Image Url For web chat (optional):</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input matInput placeholder="Image Url">
+                                <mat-hint align="start">Enter Image Url</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">Bot Primary Color (optional):</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input matInput placeholder="Bot Primary Color">
+                                <mat-hint align="start">Bot Primary Color (optional)</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">User Message Color (optional):</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input matInput placeholder="User Message Color">
+                                <mat-hint align="start">User Message Color (optional)</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-group kt-form__group">
+                            <label class="col-lg-2 col-form-label">Bot Message Color (optional):</label>
+                            <mat-form-field class="example-full-width" class="col-lg-9">
+                                <input matInput placeholder="Bot Message Color">
+                                <mat-hint align="start">Bot Message Color</mat-hint>
+                            </mat-form-field>
+                        </div> -->
+
+                        <!-- <div class="form-group kt-form__group">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Enter email" type="email">
+								<mat-hint align="start">We'll never share your email with anyone else</mat-hint>
+							</mat-form-field>
+                        </div> -->
+
+                        <!-- <div class="form-group kt-form__group">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto" [formControl]="stateCtrl">
+								<mat-autocomplete #auto="matAutocomplete">
+									<mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+										<img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" />
+										<span>{{ state.name }}</span> |
+										<small>Population: {{state.population}}</small>
+									</mat-option>
+								</mat-autocomplete>
+							</mat-form-field>
+						</div>
+						<div class="form-group kt-form__group">
+							<mat-form-field class="example-full-width">
+								<input matInput placeholder="Amount" type="number" class="example-right-align" value="99.9">
+								<span matPrefix>$&nbsp;</span>
+							</mat-form-field>
+						</div> -->
+                        <!-- <div class="kt-form__group form-group">
+							<div class="kt-checkbox-list">
+								<p>
+									<mat-checkbox>Email</mat-checkbox>
+								</p>
+								<p>
+									<mat-checkbox>SMS</mat-checkbox>
+								</p>
+								<p>
+									<mat-checkbox>Phone</mat-checkbox>
+								</p>
+							</div>
+						</div> -->
+                    </div>
+                </div>
+                <div class="kt-portlet__foot">
+                    <div class="kt-form__actions kt-form__actions">
+                        <button (click)="submitform()" mat-raised-button color="primary">Submit</button>&nbsp;
+                        <button mat-raised-button type="reset">Cancel</button>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+
+
+    </div>
+
+</div>

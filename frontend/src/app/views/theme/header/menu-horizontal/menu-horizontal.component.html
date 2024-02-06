@@ -1,0 +1,42 @@
+<!-- <div class="dropdown dropdown-inline" style="margin: 23px" *ngIf="user$ | async as _user">
+
+    <a *ngIf="_user" href="" style="color: #48465b;" class=" kt-chat__title " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <b>{{_user.activeApplication.name}}</b> <i class="flaticon2-down" style="padding-left:10px"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-left dropdown-menu-md" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 33px, 0px);">
+
+        <ul class="kt-nav list-group">
+
+            <li class="kt-nav__item list-group-item" *ngFor="let _application of _user.applications">
+
+                <a (click)="changeApplication(_user,_application)" href="JavaScript:Void(0)" class="kt-nav__link">
+
+                    <span class="kt-nav__link-text">{{_application.name}}</span>
+                </a>
+            </li>
+
+            <li class="kt-nav__separator"></li>
+            <li class="kt-nav__item">
+                <a href="#" class="kt-nav__link">
+                    <i class="kt-nav__link-icon flaticon-add-circular-button"></i>
+                    <span class="kt-nav__link-text">Add New</span>
+                </a>
+            </li>
+
+
+
+        </ul>
+    </div>
+</div> -->
+
+
+<div style="margin-top: 5px" *ngIf="user$ | async as _user">
+    <!-- {{_user|json}} -->
+
+    <!-- <span class="menu-text"> <strong>Application</strong> </span> -->
+
+    <mat-tab-group *ngIf="tabs$.length" [selectedIndex]="selectedTab" (selectedIndexChange)="onTabChanged($event)" mat-align-tabs="start">
+        <mat-tab *ngFor="let tab of tabs$" label="{{tab.name}}"></mat-tab>
+
+    </mat-tab-group>
+</div>

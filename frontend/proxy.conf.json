@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "https://static.dev.arrowai.in",
+      "secure": false,
+      "pathRewrite": {"^/api" : ""}
+    }
+  }

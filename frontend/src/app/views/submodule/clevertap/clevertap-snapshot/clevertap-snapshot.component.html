@@ -1,0 +1,191 @@
+<div class="row">
+<div class="col-xl-12">
+	<div class="kt-portlet">
+		<div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+					<div class="row" >
+						<!-- <mat-form-field >
+							<input matInput   [(ngModel)]="time[0]" [max]="maxDate" [matDatepicker]="picker"  >
+							<mat-datepicker-toggle  matSuffix  [for]="picker"></mat-datepicker-toggle>
+							<mat-datepicker #picker ></mat-datepicker>
+							  </mat-form-field>
+						  <mat-form-field >
+							<input matInput   [(ngModel)]="time[time.length-1]" [max]="maxDate" [matDatepicker]="picker1" >
+							<mat-datepicker-toggle  matSuffix  [for]="picker1"></mat-datepicker-toggle>
+							<mat-datepicker #picker1></mat-datepicker>
+						  </mat-form-field> -->
+						  <h3 class="kt-portlet__head-title" *ngIf="status==0">Last 7 Days</h3>
+						  <h3 class="kt-portlet__head-title" *ngIf="status==1">This Month</h3>
+						  <h3 class="kt-portlet__head-title" *ngIf="status==2">Last Month</h3>
+
+					</div>
+				</div>
+                <div class=" card-toolbar">
+					<div ngbDropdown>
+						<button class="btn" id="dropdownConfig" ngbDropdownToggle>
+							<span class="material-icons">
+							more_vert
+							</span></button>
+						<div ngbDropdownMenu aria-labelledby="dropdownConfig">
+						  <button class="dropdown-item" (click)="lastWeekData()">Last 7 Days</button>
+						  <button class="dropdown-item" (click)="thisMonthData()">This Month</button>
+						  <button class="dropdown-item" (click)="lastMonthData()">Last Month</button>
+						</div>
+					  </div>	
+					</div>
+        </div>
+		<div class="kt-portlet__body">
+		<div class="row newclass">
+			<div class="col-xl-4">
+			<div class="d-flex align-items-center mr-3">
+				<a  class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">Total Active User</a>
+			</div>
+			<div class="d-flex flex-wrap my-2">
+				<a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">{{activeUserLengthValue}}</a>
+			</div>
+			
+			</div>
+			<div class="col-xl-4">
+			<div class="d-flex align-items-center mr-3">
+				<a  class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">Total Campaign</a>
+			</div>
+			<div class="d-flex flex-wrap my-2">
+				<a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">{{campaignLength}}</a>
+			</div>
+			
+			</div>
+			<div class="col-xl-4">
+			<div class="d-flex align-items-center mr-3">
+				<a  class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">Total Bots</a>
+			</div>
+			<div class="d-flex flex-wrap my-2">
+				<a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">{{botslength}}</a>
+			</div>
+			
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-xl-6">
+    <div class="kt-portlet">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon kt-hidden">
+                    <i class="la la-gear"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    New Users
+                </h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div height="100px" >
+                <canvas id="ctx">{{chart}}</canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="col-xl-6">
+<div class="kt-portlet">
+    <div class="kt-portlet__head">
+        <div class="kt-portlet__head-label">
+            <span class="kt-portlet__head-icon kt-hidden">
+                <i class="la la-gear"></i>
+            </span>
+            <h3 class="kt-portlet__head-title">
+                Daily Conversation
+            </h3>
+        </div>
+    </div>
+    <div class="kt-portlet__body">
+        <div height="400px" >
+            <canvas id="today">{{todayChart}}</canvas>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+    <div class="kt-portlet">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-label">
+                <span class="kt-portlet__head-icon kt-hidden">
+                    <i class="la la-gear"></i>
+                </span>
+                <h3 class="kt-portlet__head-title">
+                    Active Users
+                </h3>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div height="100px" >
+                <canvas id="active">{{activeChart}}</canvas>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+<!-- <div class="row">
+	<div class="col-xl-4">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Download Files'">
+				<ng-container ktPortletTools>
+					<kt-context-menu2></kt-context-menu2>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<kt-widget4 [data]="widget4_1">
+					<ng-template #actionTemplate let-item="item">
+						<div class="kt-widget4__tools">
+							<a href="javascript:;" class="btn btn-clean btn-icon btn-sm">
+								<i class="flaticon2-download-symbol-of-down-arrow-in-a-rectangle"></i>
+							</a>
+						</div>
+					</ng-template>
+				</kt-widget4>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-xl-4">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'New Users'">
+				<ng-container ktPortletTools>
+					<kt-context-menu2></kt-context-menu2>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<kt-widget4 [data]="widget4_2">
+					<ng-template #actionTemplate let-item="item">
+						<a href="javascript:;" class="btn btn-sm" [ngClass]="item.buttonClass">Follow</a>
+					</ng-template>
+				</kt-widget4>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+	<div class="col-xl-4">
+		<kt-portlet [class]="'kt-portlet--height-fluid'">
+			<kt-portlet-header [title]="'Latest Updates'">
+				<ng-container ktPortletTools>
+					<kt-context-menu2></kt-context-menu2>
+				</ng-container>
+			</kt-portlet-header>
+			<kt-portlet-body>
+				<kt-widget4 [data]="widget4_3">
+					<ng-template #actionTemplate let-item="item">
+						<span class="kt-widget4__number" [ngClass]="item.valueColor">{{item.value}}</span>
+					</ng-template>
+				</kt-widget4>
+			</kt-portlet-body>
+		</kt-portlet>
+	</div>
+</div> -->
+
+<!-- <div>
+    <canvas id="ctx">{{ chart }}</canvas>
+</div> -->

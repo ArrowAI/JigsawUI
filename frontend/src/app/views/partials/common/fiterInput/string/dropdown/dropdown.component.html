@@ -1,0 +1,25 @@
+<div class="col-xl-12">
+    <fieldset class="form-group">
+        <select (change)="changeDropDown(selectedOption)" [(ngModel)]="selectedOption" class="form-control form-control-sm">
+                <option value="0" [selected]="isSelected" label="is">is</option>
+                <option value="1" label="is not">is not</option>
+                <option value="2" label="contains">contains</option>
+                <option value="3" label="does not contain">does not contain</option>
+                <option value="4" label="starts with">starts with</option>
+                <option value="5" label="does not start with">does not start with</option>
+                <option value="6" label="ends with">ends with</option>
+                <option value="7" label="does not end with">does not end with</option>
+                <option value="8" label="in the following">in the following</option>
+                <option value="9" label="not in the following">not in the following</option>
+                <option value="10" label="exists">exists</option>
+                <option value="11" label="does not exist">does not exist</option>
+        </select>
+    </fieldset>
+
+</div>
+<div class="col-xl-12">
+
+    <kt-string-input>
+    </kt-string-input>
+
+</div>
