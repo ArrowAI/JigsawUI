@@ -10,7 +10,21 @@ This is different from standard react applications where for any changes made to
 
 
 ## Main Features
-- Load Compiled Modules
+- **Load Compiled Modules**: You can load Modules during Runtime in Production, without making changes or redeploying the application.
+- **Generate Modules Automatically with AI**: You can automatically Generate the Modules using AI and Integrated Code Editor. You can also bring in your own applications written in any Framework like Angular, React etc and use it as a module.
+
+# Quickstart
+
+The Easiest way to get started is by creating an [ArrowAI Account](http://www.arrowai.com). Jigsaw UI can also be used independently for any of your project. 
+
+## Self Host
+
+
+# Documentation
+
+[doc]()
+
+# Roadmap
 
 
 ## Other options vs Jigsaw UI
