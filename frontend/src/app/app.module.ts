@@ -141,8 +141,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 		MatProgressSpinnerModule,
 		InlineSVGModule.forRoot(),
 		ThemeModule,
-		// AngularFireMessagingModule,
-		// AngularFireModule.initializeApp(environment.firebase),
+		AngularFireMessagingModule,
+		AngularFireModule.initializeApp(environment.firebase),
 		ServiceWorkerModule.register("ngsw-worker.js", {
 			enabled: environment.production
 		})

@@ -1,5 +1,5 @@
 // Angular
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -80,7 +80,7 @@ import { SendUserMessageComponent } from './send-user-message/send-user-message.
 
 	//declarations: [MyPageComponent, TestpageComponent, EventsComponent, SettingsComponent, IntegrationsComponent, UserProfileComponent, NewApplicaitonComponent, ApplicationListComponent],
 	// declarations: [ApplicationListComponent],
-	exports: [],
+	// exports: [],
 	imports: [
 		// AngularFireModule.initializeApp(environment.firebase),
 		CommonModule,
@@ -159,6 +159,8 @@ import { SendUserMessageComponent } from './send-user-message/send-user-message.
 		//   DialogFlowComponent
 		// NewApplicaitonComponent
 	],
+	exports: [SendUserMessageComponent],
+	schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PagesModule {
 }

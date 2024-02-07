@@ -23,7 +23,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { AuthNoticeComponent } from './auth-notice/auth-notice.component';
 // Auth
 import { AuthEffects, AuthGuard, authReducer, AuthService } from '../../../core/auth';
-// import { AppFirebaseModule } from '../app-firebase-module/app-firebase-module';
+import { AppFirebaseModule } from '../app-firebase-module/app-firebase-module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -60,7 +60,7 @@ const routes: Routes = [
 
 @NgModule({
 	imports: [
-		// AppFirebaseModule,
+		AppFirebaseModule,
 		CommonModule,
 		FormsModule,
 		ReactiveFormsModule,

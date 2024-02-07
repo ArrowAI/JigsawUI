@@ -150,7 +150,7 @@ export class SparklineChartDirective implements AfterViewInit {
 			}
 		};
 
-		this.chart = new Chart(src, config);
+		// this.chart = new Chart(src, config);
 	}
 
 	/**
