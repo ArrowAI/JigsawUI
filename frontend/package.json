@@ -123,13 +123,6 @@
         "karma-jasmine": "~5.1.0",
         "karma-jasmine-html-reporter": "~2.1.0",
         "typescript": "~5.1.3",
-<<<<<<< HEAD
-    
-
-        "@angular/common": "16.2.0",
- 
-=======
->>>>>>> 4dac18fdd90948218588567e548b907b4cbaabac
         "@angular/language-service": "16.2.0",
         "@angular/material-moment-adapter": "^8.2.3",
         "@angular/platform-browser": "16.2.0",
