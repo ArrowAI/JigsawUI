@@ -42,7 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
@@ -138,14 +138,14 @@ import { SendUserMessageComponent } from './send-user-message/send-user-message.
 		// CommonService,
 
 	],
-	entryComponents: [
-		ActionNotificationComponent,
-		NewApplicaitonComponent,
-		SendUserMessageComponent
+	// entryComponents: [
+	// 	ActionNotificationComponent,
+	// 	NewApplicaitonComponent,
+	// 	SendUserMessageComponent
 
 
 
-	],
+	// ],
 	declarations: [
 		// MyPageComponent,
 		//  TestpageComponent,

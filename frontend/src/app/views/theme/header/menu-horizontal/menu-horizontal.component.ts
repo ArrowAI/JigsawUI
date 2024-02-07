@@ -28,7 +28,7 @@ import { Observable } from 'rxjs';
 // NGRX
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../../core/reducers';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { LayoutUtilsService } from '../../../../core/_base/crud';
 import { TranslateService } from '@ngx-translate/core';

@@ -23,7 +23,7 @@ import { currentUser, Login, UserLoaded } from '../../../core/auth';
 // import { environment } from './../../../../environments/environment';
 import * as environment from '../../../../assets/app-config.json';
 
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { NewApplicaitonComponent } from '../../pages/application/new-applicaiton/new-applicaiton.component';
 
