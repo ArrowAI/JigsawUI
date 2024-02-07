@@ -67,11 +67,7 @@ import {
 // Config
 import { LayoutConfig } from "./core/_config/layout.config";
 // Highlight JS
-import { HIGHLIGHT_OPTIONS, HighlightLanguage } from "ngx-highlightjs";
-import * as typescript from "highlight.js/lib/languages/typescript";
-import * as scss from "highlight.js/lib/languages/scss";
-import * as xml from "highlight.js/lib/languages/xml";
-import * as json from "highlight.js/lib/languages/json";
+import { HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 
 import { InlineSVGModule } from "ng-inline-svg";
 import { AngularFireModule } from "@angular/fire/compat";
@@ -104,15 +100,6 @@ export function initializeLayoutConfig(appConfig: LayoutConfigService) {
 	};
 }
 
-
-export function hljsLanguages(): HighlightLanguage[] {
-	return [
-		{ name: "typescript", func: typescript },
-		{ name: "scss", func: scss },
-		{ name: "xml", func: xml },
-		{ name: "json", func: json },
-	];
-}
 const appInitializerFn = (appConfig: AppConfigService) => {
 	return () => {
 		// console.log(appco)
@@ -181,7 +168,12 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 		},
 		{
 			provide: HIGHLIGHT_OPTIONS,
-			useValue: { languages: hljsLanguages },
+			useValue: {
+				typescript: () => import('highlight.js/lib/languages/typescript'),
+				scss: () => import('highlight.js/lib/languages/scss'),
+				json: () => import('highlight.js/lib/languages/json'),
+				xml: () => import('highlight.js/lib/languages/xml')
+			},
 		},
 		{
 			provide: LocationStrategy,
