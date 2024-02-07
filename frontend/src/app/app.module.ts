@@ -67,7 +67,7 @@ import {
 // Config
 import { LayoutConfig } from "./core/_config/layout.config";
 // Highlight JS
-import { HIGHLIGHT_OPTIONS, HighlightLanguage } from "ngx-highlightjs";
+import { HIGHLIGHT_OPTIONS } from "ngx-highlightjs";
 import * as typescript from "highlight.js/lib/languages/typescript";
 import * as scss from "highlight.js/lib/languages/scss";
 import * as xml from "highlight.js/lib/languages/xml";
@@ -105,7 +105,7 @@ export function initializeLayoutConfig(appConfig: LayoutConfigService) {
 }
 
 
-export function hljsLanguages(): HighlightLanguage[] {
+export function hljsLanguages(): any[] {
 	return [
 		{ name: "typescript", func: typescript },
 		{ name: "scss", func: scss },
@@ -141,10 +141,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 		MatProgressSpinnerModule,
 		InlineSVGModule.forRoot(),
 		ThemeModule,
-		AngularFireMessagingModule,
-		AngularFireModule.initializeApp(environment.firebase),
+		// AngularFireMessagingModule,
+		// AngularFireModule.initializeApp(environment.firebase),
 		ServiceWorkerModule.register("ngsw-worker.js", {
-			enabled: environment.production,
+			enabled: environment.production
 		})
 	],
 	exports: [],

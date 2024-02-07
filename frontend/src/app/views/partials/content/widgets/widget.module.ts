@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CoreModule } from '../../../../core/core.module';
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 // Datatable
 import { DataTableComponent } from './general/data-table/data-table.component';
 // General widgets
@@ -45,7 +45,7 @@ import { MatSortModule } from '@angular/material/sort';
 	],
 	imports: [
 		CommonModule,
-		PerfectScrollbarModule,
+		// PerfectScrollbarModule,
 		MatTableModule,
 		CoreModule,
 		MatIconModule,

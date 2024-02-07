@@ -113,7 +113,7 @@ import { SendUserMessageComponent } from './send-user-message/send-user-message.
 		MatTabsModule,
 		MatTooltipModule,
 		MatDialogModule,
-		MatChipsModule,
+		MatChipsModule
 	],
 	providers: [
 		InterceptService,

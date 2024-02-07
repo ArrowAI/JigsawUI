@@ -29,7 +29,7 @@ import { MatChipsModule } from '@angular/material/chips';
 // NgBootstrap
 import {NgbDropdownModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 // Perfect Scrollbar
-import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
+// import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 // Core module
 import {CoreModule} from '../../core/core.module';
 // CRUD Partials
@@ -159,7 +159,7 @@ import { MenuHorizontalComponent } from '../theme/header/menu-horizontal/menu-ho
 		RouterModule,
 		FormsModule,
 		ReactiveFormsModule,
-		PerfectScrollbarModule,
+		// PerfectScrollbarModule,
 		InlineSVGModule.forRoot(),
 		CoreModule,
 		PortletModule,

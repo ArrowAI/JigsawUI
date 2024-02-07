@@ -7,7 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 // NgBootstrap
 // import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 // Perfect Scrollbar
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 // Partials
 import { PartialsModule } from '../../../partials/partials.module';
 // Highlight JS
@@ -24,7 +24,7 @@ import { BuilderComponent } from './builder.component';
 		FormsModule,
 		MatTabsModule,
 		CoreModule,
-		PerfectScrollbarModule,
+		// PerfectScrollbarModule,
 		HighlightModule,
 		RouterModule.forChild([
 			{

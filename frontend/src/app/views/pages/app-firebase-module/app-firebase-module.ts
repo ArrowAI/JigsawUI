@@ -24,6 +24,6 @@ import { environment } from '../../../../environments/environment';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
   ],
-  exports: [Auth], // Correctly export the Auth service
+  exports: [Auth] // Correctly export the Auth service
 })
 export class AppFirebaseModule {}
