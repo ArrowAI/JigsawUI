@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached
+
+    # Overrides default command so things don't shut down after the process ends.
+    command: sleep infinity
+
+    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
+    # network_mode: service:mongodb
+    networks:
+      - arrowaiNetwork
+
+    environment:
+      REDIS_URL_HOST: redis
+      REDIS_URL_PORT: 6379
+      MONGO_DB: mongodb
+      MONGO_DB_NAME: arrowaidb
+      MONGO_USER: root
+      MONGO_PASS: mongo
+
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+    volumes:
+      - mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+      MONGO_INITDB_DATABASE: arrowaidb
+    ports:
+      - "27017:27017"
+    networks:
+      - arrowaiNetwork
+  
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - arrowaiNetwork
+  
+volumes:
+  mongodb-data:
+
+networks:
+  arrowaiNetwork:
