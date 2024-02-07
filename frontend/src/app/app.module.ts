@@ -124,7 +124,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
-		// AngularFireModule.initializeApp(environment.firebase),
 		BrowserAnimationsModule,
 		BrowserModule,
 		AppRoutingModule,
@@ -146,8 +145,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 		AngularFireModule.initializeApp(environment.firebase),
 		ServiceWorkerModule.register("ngsw-worker.js", {
 			enabled: environment.production,
-		}),
-		// ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+		})
 	],
 	exports: [],
 	providers: [
