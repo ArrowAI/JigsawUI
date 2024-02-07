@@ -181,7 +181,12 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 		},
 		{
 			provide: HIGHLIGHT_OPTIONS,
-			useValue: { languages: hljsLanguages },
+			useValue: {
+				typescript: () => import('highlight.js/lib/languages/typescript'),
+				scss: () => import('highlight.js/lib/languages/scss'),
+				json: () => import('highlight.js/lib/languages/json'),
+				xml: () => import('highlight.js/lib/languages/xml')
+			},
 		},
 		{
 			provide: LocationStrategy,
