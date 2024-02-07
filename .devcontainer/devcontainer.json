@@ -33,5 +33,5 @@
 	"forwardPorts": [3000, 27017, 6379],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "git config --global user.email \"utk.shukla@gmail.com\" && git config --global user.name \"Utkarsh\" && pnpm install"
+	"postCreateCommand": "git config --global user.email \"utk.shukla@gmail.com\" && git config --global user.name \"Utkarsh\" && npm install"
 }
