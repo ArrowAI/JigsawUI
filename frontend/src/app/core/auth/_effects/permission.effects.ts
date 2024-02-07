@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { mergeMap, map, tap } from 'rxjs/operators';
 import { defer, Observable, of } from 'rxjs';
 // NGRX
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import {  Actions, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 // Services
 import { AuthService } from '../_services';
@@ -19,7 +19,7 @@ import { Permission } from '../_models/permission.model';
 
 @Injectable()
 export class PermissionEffects {
-    @Effect()
+    // @Effect()
     loadAllPermissions$ = this.actions$
         .pipe(
             ofType<AllPermissionsRequested>(PermissionActionTypes.AllPermissionsRequested),
@@ -31,7 +31,7 @@ export class PermissionEffects {
             })
           );
 
-    @Effect()
+    // @Effect()
     init$: Observable<Action> = defer(() => {
         return of(new AllPermissionsRequested());
     });

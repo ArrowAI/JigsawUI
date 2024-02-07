@@ -9,7 +9,7 @@ import { selectAllPermissions } from './permission.selectors';
 import { Role } from '../_models/role.model';
 import { Permission } from '../_models/permission.model';
 import { element } from 'protractor';
-import { auth } from 'firebase';
+
 
 export const selectAuthState = state => state.auth;
 

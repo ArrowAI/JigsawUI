@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { mergeMap, map, tap } from 'rxjs/operators';
 import { Observable, defer, of, forkJoin } from 'rxjs';
 // NGRX
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import {  Actions, ofType } from '@ngrx/effects';
 import { Store, select, Action } from '@ngrx/store';
 // CRUD
 import { QueryResultsModel, QueryParamsModel } from '../../_base/crud';
@@ -32,7 +32,7 @@ export class UserEffects {
     showActionLoadingDistpatcher = new UsersActionToggleLoading({ isLoading: true });
     hideActionLoadingDistpatcher = new UsersActionToggleLoading({ isLoading: false });
 
-    @Effect()
+    // @Effect()
     loadUsersPage$ = this.actions$
         .pipe(
             ofType<UsersPageRequested>(UserActionTypes.UsersPageRequested),
@@ -53,7 +53,7 @@ export class UserEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     deleteUser$ = this.actions$
         .pipe(
             ofType<UserDeleted>(UserActionTypes.UserDeleted),
@@ -67,7 +67,7 @@ export class UserEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     updateUser$ = this.actions$
         .pipe(
             ofType<UserUpdated>(UserActionTypes.UserUpdated),
@@ -80,7 +80,7 @@ export class UserEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     createUser$ = this.actions$
         .pipe(
             ofType<UserOnServerCreated>(UserActionTypes.UserOnServerCreated),

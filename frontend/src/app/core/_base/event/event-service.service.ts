@@ -5,8 +5,10 @@ import { HttpUtilsService, QueryParamsModel, QueryResultsModel } from '../crud';
 
 // RxJS
 import { Observable, BehaviorSubject } from 'rxjs';
-// import { environment } from './../../../../../src/environments/environment';
-import * as environment from '../../../../assets/app-config.json';
+import { environment } from './../../../../../src/environments/environment';
+// import * as environment from '../../../../assets/app-config.json';
+// import {authTokenKey,API_SERVER,DREAM_FACTORY_URL} from '../../../../assets/app-config.json';
+
 
 import { HeaderService } from '../layout/services/header-service';
 import { SubheaderService, MenuAsideService } from '../layout';

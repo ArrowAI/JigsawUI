@@ -4,8 +4,8 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } fr
 // RxJS
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-// import { environment } from '../../../../../environments/environment';
-import * as environment from '../../../../../assets/app-config.json';
+import { environment } from '../../../../../environments/environment';
+// import * as environment from '../../../../../assets/app-config.json';
 
 import { Action, select, Store } from '@ngrx/store';
 import { AppState } from '../../../reducers';

@@ -9,8 +9,8 @@ import {
 } from "@angular/core";
 // RxJS
 import { Subscription } from "rxjs";
-// import { environment } from "./../../../../../../environments/environment";
-import * as environment from '../../../../../../assets/app-config.json';
+import { environment } from "./../../../../../../environments/environment";
+// import * as environment from '../../../../../../assets/app-config.json';
 
 // Layout
 import { SubheaderService } from "../../../../../core/_base/layout";

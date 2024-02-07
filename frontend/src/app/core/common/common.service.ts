@@ -21,8 +21,8 @@ import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sass';
 import 'prismjs/components/prism-scss';
-// import { environment } from './../../../environments/environment';
-import * as environment from '../../../assets/app-config.json';
+import { environment } from './../../../environments/environment';
+// import * as environment from '../../../assets/app-config.json';
 
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../reducers';

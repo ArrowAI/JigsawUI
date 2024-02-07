@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireMessaging } from '@angular/fire/messaging';
+// import { AngularFireMessaging } from '@angular/fire/messaging';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { BehaviorSubject } from 'rxjs'
-// import { environment } from './../../environments/environment';
-import * as environment from '../../assets/app-config.json';
+import { environment } from './../../environments/environment';
+// import * as environment from '../../assets/app-config.json';
 
 
 @Injectable({ providedIn: 'root' })
@@ -12,12 +13,11 @@ export class MessagingService {
   currentMessage = new BehaviorSubject(null);
   constructor(private angularFireMessaging: AngularFireMessaging,
     private http: HttpClient) {
-    this.angularFireMessaging.messages.subscribe(
-      (_messaging: AngularFireMessaging) => {
-        // _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-        // _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
-      }
-    )
+      this.angularFireMessaging.messages.subscribe(
+        (payload: any) => {
+          // Handle the incoming message payload here
+        }
+      )
   }
 
   requestPermission(applicationId) {

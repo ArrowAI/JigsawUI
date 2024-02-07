@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// import { environment } from './../../../../../../src/environments/environment';
-import * as environment from '../../../../../assets/app-config.json';
+import { environment } from './../../../../../../src/environments/environment';
+// import * as environment from '../../../../../assets/app-config.json';
 
  
 @Injectable({

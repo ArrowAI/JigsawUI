@@ -33,8 +33,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { LayoutUtilsService } from '../../../../core/_base/crud';
 import { TranslateService } from '@ngx-translate/core';
 import { NewApplicaitonComponent } from '../../../pages/application/new-applicaiton/new-applicaiton.component';
-// import { environment } from '../../../../../../src/environments/environment';
-import * as environment from '../../../../../assets/app-config.json';
+import { environment } from '../../../../../../src/environments/environment';
+// import * as environment from '../../../../../assets/app-config.json';
 
 import { HeaderService } from '../../../../core/_base/layout/services/header-service';
 export interface Tabs {

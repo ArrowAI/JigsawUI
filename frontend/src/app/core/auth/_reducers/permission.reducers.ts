@@ -23,7 +23,7 @@ export function permissionsReducer(state = initialPermissionsState, action: Perm
                 _isAllPermissionsLoaded: false
         };
         case PermissionActionTypes.AllPermissionsLoaded:
-            return adapter.addAll(action.payload.permissions, {
+            return adapter.upsertMany(action.payload.permissions, {
                 ...state,
                 _isAllPermissionsLoaded: true
             });

@@ -29,8 +29,8 @@ import { NewApplicaitonComponent } from './application/new-applicaiton/new-appli
 // import { UsersApplicationComponent } from './users-application/users-application.component'
 // import { AngularFireDatabase, AngularFireDatabaseModule } from '@angular/fire/database';
 // import { AngularFireModule } from '@angular/fire';
-// import { environment } from './../../../environments/environment';
-import * as environment from '../../../assets/app-config.json';
+import { environment } from './../../../environments/environment';
+// import * as environment from '../../../assets/app-config.json';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';

@@ -16,8 +16,8 @@ import {
 	Login,
 	activeUser,
 } from "../../../app/core/auth";
-// import { environment } from "./../../../../src/environments/environment";
-import * as environment from '../../../assets/app-config.json';
+import { environment } from "./../../../../src/environments/environment";
+// import * as environment from '../../../assets/app-config.json';
 
 import { DomSanitizer } from "@angular/platform-browser";
 import { SubheaderService } from "../../../app/core/_base/layout";

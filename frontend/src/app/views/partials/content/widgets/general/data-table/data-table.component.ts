@@ -1,7 +1,8 @@
 // Angular
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
+import {  MatSort } from '@angular/material/sort';
+import {MatPaginator} from '@angular/material/paginator'
 // RXJS
 import { tap } from 'rxjs/operators';
 import { merge } from 'rxjs';

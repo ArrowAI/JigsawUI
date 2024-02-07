@@ -14,11 +14,11 @@
 
 // 2: Bootstrap framework includes
 @import "global/integration/frameworks/bootstrap/variables";
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 @import "global/integration/frameworks/bootstrap/bootstrap.scss";
 
 // Material Angular
-@import "~@angular/material/theming";
+@import "@angular/material/theming";
 @import "global/integration/frameworks/angular/material/angular-material";
 @import "global/integration/frameworks/angular/material/include";
 

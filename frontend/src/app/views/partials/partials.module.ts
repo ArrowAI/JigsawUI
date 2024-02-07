@@ -1,6 +1,6 @@
 // Angular
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 
 // NgBootstrap
-import {NgbDropdownModule, NgbTabsetModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 // Perfect Scrollbar
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
 // Core module
@@ -189,9 +189,10 @@ import { MenuHorizontalComponent } from '../theme/header/menu-horizontal/menu-ho
 
 		// ng-bootstrap modules
 		NgbDropdownModule,
-		NgbTabsetModule,
 		NgbTooltipModule,
 	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA,
+		NO_ERRORS_SCHEMA],
 })
 export class PartialsModule {
 }

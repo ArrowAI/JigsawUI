@@ -5,14 +5,14 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, mergeMap, tap, withLatestFrom } from 'rxjs/operators';
 import { defer, Observable, of } from 'rxjs';
 // NGRX
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Action, select, Store } from '@ngrx/store';
 // Auth actions
 import { AuthActionTypes, Login, Logout, Register, UserLoaded, UserRequested, LoadElements, ElementLoaded } from '../_actions/auth.actions';
 import { AuthService } from '../_services/index';
 import { AppState } from '../../reducers';
-// import { environment } from '../../../../environments/environment';
-import * as environment from '../../../../assets/app-config.json';
+import { environment } from '../../../../environments/environment';
+// import * as environment from '../../../../assets/app-config.json';
 
 import { isUserLoaded } from '../_selectors/auth.selectors';
 import { CommonService } from '../../common/common.service';
@@ -20,51 +20,56 @@ import { element } from 'protractor';
 
 @Injectable()
 export class AuthEffects {
-    @Effect({ dispatch: false })
-    login$ = this.actions$.pipe(
-        ofType<Login>(AuthActionTypes.Login),
-        tap(action => {
-
-            localStorage.setItem(environment.authTokenKey, action.payload.authToken);
-            this.store.dispatch(new UserRequested());
-        }),
+    login$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<Login>(AuthActionTypes.Login),
+            tap(action => {
+                localStorage.setItem(environment.authTokenKey, action.payload.authToken);
+                this.store.dispatch(new UserRequested());
+            })
+        ),
+        { dispatch: false }
     );
 
-    @Effect({ dispatch: false })
-    logout$ = this.actions$.pipe(
-        ofType<Logout>(AuthActionTypes.Logout),
-        tap(() => {
-
-            let token = localStorage.getItem(environment.authTokenKey)
-            localStorage.removeItem(token);
-            localStorage.removeItem(environment.authTokenKey);
-            localStorage.clear();
-            this.auth.logout();
-            this.router.navigate(['/auth/login'] );
-        })
-    );
-    @Effect({ dispatch: false })
-    loadElements$ = this.actions$.pipe(
-        ofType<LoadElements>(AuthActionTypes.LoadElements),
-        mergeMap(() => this.common.getElementList()),
-        tap(elements => {
-            console.log("elements", elements);
-            this.store.dispatch(new ElementLoaded({ elements: elements.data }));
-        })
+    logout$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<Logout>(AuthActionTypes.Logout),
+            tap(() => {
+                let token = localStorage.getItem(environment.authTokenKey)
+                localStorage.removeItem(token);
+                localStorage.removeItem(environment.authTokenKey);
+                localStorage.clear();
+                this.auth.logout();
+                this.router.navigate(['/auth/login']);
+            })
+        ),
+        { dispatch: false }
     );
 
-    @Effect({ dispatch: false })
-    register$ = this.actions$.pipe(
-        ofType<Register>(AuthActionTypes.Register),
-        tap(action => {
-            localStorage.setItem(environment.authTokenKey, action.payload.authToken);
-        })
+    loadElements$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<LoadElements>(AuthActionTypes.LoadElements),
+            mergeMap(() => this.common.getElementList()),
+            tap(elements => {
+                console.log("elements", elements);
+                this.store.dispatch(new ElementLoaded({ elements: elements.data }));
+            })
+        ),
+        { dispatch: false }
     );
 
-    @Effect({ dispatch: false })
-    loadUser$ = this.actions$
-        .pipe(
-            //debugger;
+    register$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType<Register>(AuthActionTypes.Register),
+            tap(action => {
+                localStorage.setItem(environment.authTokenKey, action.payload.authToken);
+            })
+        ),
+        { dispatch: false }
+    );
+
+    loadUser$ = createEffect(() =>
+        this.actions$.pipe(
             ofType<UserRequested>(AuthActionTypes.UserRequested),
             withLatestFrom(this.store.pipe(select(isUserLoaded))),
             filter(([action, _isUserLoaded]) => !_isUserLoaded),
@@ -73,10 +78,7 @@ export class AuthEffects {
                 console.log("user config is",_user);
                 if (_user.auth && _user.auth == false) {
                     this.store.dispatch(new Logout());
-                    
-                }
-                
-                 else {
+                } else {
                     let user = JSON.parse(localStorage.getItem("activeUser"))
                     _user.username = user.name;
                     _user.fullname = _user.name;
@@ -95,9 +97,10 @@ export class AuthEffects {
                     this.store.dispatch(new UserLoaded({ user: _user }));
                 }
             })
-        );
+        ),
+        { dispatch: false }
+    );
 
-    @Effect()
     init$: Observable<Action> = defer(() => {
         const userToken = localStorage.getItem(environment.authTokenKey);
         let observableResult = of({ type: 'NO_ACTION' });
@@ -116,7 +119,6 @@ export class AuthEffects {
         private store: Store<AppState>) {
 
         this.router.events.subscribe(event => {
-            //  console.log(event);
             if (event instanceof NavigationEnd) {
                 this.returnUrl = event.url;
             }

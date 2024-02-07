@@ -6,6 +6,7 @@ import {
 	OnInit,
 	ViewEncapsulation,
 } from "@angular/core";
+import { User as fUser } from 'firebase/auth';
 import { Logout } from '../../../../core/auth';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	private returnUrl: any;
 	private userType: string;
-	user$: Observable<firebase.User> = this.auth.user$;
+	user$: Observable<fUser> = this.auth.user$;
 
 	// Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
@@ -135,7 +136,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	 */
 	ngOnDestroy(): void {
 		this.authNoticeService.setNotice(null);
-		this.unsubscribe.next();
+		this.unsubscribe.next(null);
 		this.unsubscribe.complete();
 		this.loading = false;
 	}

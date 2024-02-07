@@ -9,8 +9,8 @@ import { Store, select } from '@ngrx/store';
 
 import { AppState } from '../../../core/reducers';
 import { currentUser, Login } from '../../../core/auth';
-// import { environment } from './../../../../../src/environments/environment.prod';
-import * as environment from '../../../../assets/app-config.json';
+import { environment } from './../../../../../src/environments/environment.prod';
+// import * as environment from '../../../../assets/app-config.json';
 
 import { CommonService } from '../../../core/common/common.service';
 import { LayoutUtilsService, MessageType } from '../../../core/_base/crud';

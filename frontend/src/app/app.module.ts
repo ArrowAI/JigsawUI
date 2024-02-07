@@ -7,7 +7,7 @@ import { APP_INITIALIZER, NgModule, NgZone } from "@angular/core";
 import { TranslateModule } from "@ngx-translate/core";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { GestureConfig, MatProgressSpinnerModule } from "@angular/material";
+
 import { OverlayModule } from "@angular/cdk/overlay";
 // Angular in memory
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
@@ -19,8 +19,8 @@ import {
 // SVG inline
 
 // Env
-// import { environment } from "../environments/environment";
-import * as environment from '../assets/app-config.json';
+import { environment } from "../environments/environment";
+// import * as environment from '../assets/app-config.json';
 // Hammer JS
 import "hammerjs";
 // NGX Permissions
@@ -74,15 +74,18 @@ import * as xml from "highlight.js/lib/languages/xml";
 import * as json from "highlight.js/lib/languages/json";
 
 import { InlineSVGModule } from "ng-inline-svg";
-import { AngularFireModule } from "@angular/fire";
+import { AngularFireModule } from "@angular/fire/compat";
+
 import { HeaderService } from "./core/_base/layout/services/header-service";
 import { LocationStrategy, HashLocationStrategy } from "@angular/common";
 // import { SafePipe } from './core/chat/pipes/safe.pipe';
 import { ServiceWorkerModule } from "@angular/service-worker";
 // import { ServiceWorkerModule } from '@angular/service-worker';
 
-import { AngularFireMessagingModule } from "@angular/fire/messaging";
+import { AngularFireMessaging, AngularFireMessagingModule } from "@angular/fire/compat/messaging";
+
 import { AppConfigService } from "./app-config.service";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -167,10 +170,10 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
 		},
-		{
-			provide: HAMMER_GESTURE_CONFIG,
-			useClass: GestureConfig,
-		},
+		// {
+		// 	provide: HAMMER_GESTURE_CONFIG,
+		// 	useClass: GestureConfig,
+		// },
 		{
 			// layout config initializer
 			provide: APP_INITIALIZER,

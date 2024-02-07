@@ -20,8 +20,8 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../core/reducers';
 import { currentUser, Login, UserLoaded } from '../../../core/auth';
-// import { environment } from './../../../../environments/environment';
-import * as environment from '../../../../assets/app-config.json';
+import { environment } from './../../../../environments/environment';
+// import * as environment from '../../../../assets/app-config.json';
 
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 

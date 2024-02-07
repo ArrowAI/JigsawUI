@@ -10,8 +10,8 @@ import { Store, select } from '@ngrx/store';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startWith, map } from 'rxjs/operators';
-// import { environment } from './../../../../../environments/environment';
-import * as environment from '../../../../../assets/app-config.json';
+import { environment } from './../../../../../environments/environment';
+// import * as environment from '../../../../../assets/app-config.json';
 
 import { ApplicaitonService } from '../../../../core/application/applicaiton.service';
 import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';

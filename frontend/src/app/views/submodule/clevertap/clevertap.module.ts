@@ -4,11 +4,15 @@ import { ClevertapComponent } from './clevertap/clevertap.component';
 import { ClevertapSnapshotComponent } from './clevertap-snapshot/clevertap-snapshot.component';
 import { ClevertapTodayComponent } from './clevertap-today/clevertap-today.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+// import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes:Routes=[
  { path: '',

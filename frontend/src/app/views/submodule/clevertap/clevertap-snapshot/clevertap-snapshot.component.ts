@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 import { User, currentUser, Login } from '../../../../core/auth';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../../../../core/reducers';
-// import { environment } from './../../../../../../src/environments/environment';
-import * as environment from '../../../../../assets/app-config.json';
+import { environment } from './../../../../../../src/environments/environment';
+// import * as environment from '../../../../../assets/app-config.json';
 
 import { SubheaderService } from '../../../../core/_base/layout';
 import { HeaderService } from '../../../../core/_base/layout/services/header-service';

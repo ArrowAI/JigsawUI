@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { of, Observable, defer, forkJoin } from 'rxjs';
 import { mergeMap, map, withLatestFrom, filter, tap } from 'rxjs/operators';
 // NGRX
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import {  Actions, ofType } from '@ngrx/effects';
 import { Store, select, Action } from '@ngrx/store';
 // CRUD
 import { QueryResultsModel, QueryParamsModel } from '../../_base/crud';
@@ -37,7 +37,7 @@ export class RoleEffects {
     showActionLoadingDistpatcher = new RolesActionToggleLoading({ isLoading: true });
     hideActionLoadingDistpatcher = new RolesActionToggleLoading({ isLoading: false });
 
-    @Effect()
+    // @Effect()
     loadAllRoles$ = this.actions$
         .pipe(
             ofType<AllRolesRequested>(RoleActionTypes.AllRolesRequested),
@@ -49,7 +49,7 @@ export class RoleEffects {
             })
           );
 
-    @Effect()
+    // @Effect()
     loadRolesPage$ = this.actions$
         .pipe(
             ofType<RolesPageRequested>(RoleActionTypes.RolesPageRequested),
@@ -72,7 +72,7 @@ export class RoleEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     deleteRole$ = this.actions$
         .pipe(
             ofType<RoleDeleted>(RoleActionTypes.RoleDeleted),
@@ -86,7 +86,7 @@ export class RoleEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     updateRole$ = this.actions$
         .pipe(
             ofType<RoleUpdated>(RoleActionTypes.RoleUpdated),
@@ -100,7 +100,7 @@ export class RoleEffects {
         );
 
 
-    @Effect()
+    // @Effect()
     createRole$ = this.actions$
         .pipe(
             ofType<RoleOnServerCreated>(RoleActionTypes.RoleOnServerCreated),
@@ -117,7 +117,7 @@ export class RoleEffects {
             }),
         );
 
-    @Effect()
+    // @Effect()
     init$: Observable<Action> = defer(() => {
         return of(new AllRolesRequested());
     });

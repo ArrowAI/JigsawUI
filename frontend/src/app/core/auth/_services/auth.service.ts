@@ -6,11 +6,14 @@ import { Permission } from '../_models/permission.model';
 import { Role } from '../_models/role.model';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { QueryParamsModel, QueryResultsModel } from '../../_base/crud';
-// import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
-import * as environment from '../../../../assets/app-config.json';
+import firebase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import 'firebase/compat/auth';
+
+
+// import * as environment from '../../../../assets/app-config.json';
 
 
 const API_PERMISSION_URL = 'api/permissions';
@@ -28,13 +31,13 @@ export class AuthService {
 	constructor(private http: HttpClient, private afAuth: AngularFireAuth) {
 		this.user.next(this.afAuth.authState);
 	}
-	loginViaGoogle(): Observable<auth.UserCredential> {
-		var provider = new auth.GoogleAuthProvider();
+	loginViaGoogle(): Observable<firebase.auth.UserCredential> {
+		var provider = new firebase.auth.GoogleAuthProvider();
 		provider.addScope('email');
 		return from(this.afAuth.signInWithPopup(provider));
 	}
-	loginViaGitHub(): Observable<auth.UserCredential> {
-		var provider = new auth.GithubAuthProvider();
+	loginViaGitHub(): Observable<firebase.auth.UserCredential> {
+		var provider = new firebase.auth.GithubAuthProvider();
 		provider.addScope('email');
 		return from(this.afAuth.signInWithPopup(provider));
 	}
