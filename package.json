@@ -1,0 +1,20 @@
+{
+  "name": "jigsawui",
+  "version": "1.0.0",
+  "description": "![image](frontend/docs/Screenshot1.png)",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+  
+}
