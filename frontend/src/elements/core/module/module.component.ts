@@ -27,7 +27,7 @@ import { CommonService } from "../../../app/core/common/common.service";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { EventService } from "../../../app/core/_base/event/event-service.service";
 // import { SendCampaignDialogComponent } from '../send-campaign-dialog/send-campaign-dialog.component';
-import { MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material/dialog";
 import { SendUserMessageComponent } from "../../../app/views/pages/send-user-message/send-user-message.component";
 import { element } from "protractor";
 import { MessagingService } from "../../../app/sevices/messaging.service";

@@ -1,6 +1,8 @@
 // Angular
 import { Injectable } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import {  MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 // Partials for CRUD
 import { ActionNotificationComponent,
 	DeleteEntityDialogComponent,

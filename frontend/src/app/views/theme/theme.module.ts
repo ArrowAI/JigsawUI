@@ -5,9 +5,27 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Angular Material
-import { MatButtonModule, MatProgressBarModule, 
-	MatTabsModule, MatTooltipModule, MatInputModule, MatSelectModule, MatMenuModule, MatTableModule, MatAutocompleteModule, MatRadioModule, MatIconModule, MatNativeDateModule, MatDatepickerModule, MatCardModule, MatPaginatorModule, MatSortModule, MatCheckboxModule, MatProgressSpinnerModule, MatSnackBarModule, MatExpansionModule, MatDialogModule,
-	 MatChipsModule } from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
 // NgBootstrap
 import { NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 // Translation
@@ -46,6 +64,9 @@ import { AuthModule } from '../pages/auth/auth.module';
 import { reducers,metaReducers } from '../../core/reducers';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MatInputModule } from '@angular/material/input';
+
+
 
 @NgModule({
 	declarations: [
@@ -72,7 +93,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		MenuHorizontalComponent,
 
 		ErrorPageComponent,
-		
+
 	],
 	exports: [
 		BaseComponent,
@@ -110,9 +131,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		StoreModule.forFeature('roles', rolesReducer),
 		StoreModule.forFeature('permissions', permissionsReducer),
 		EffectsModule.forFeature([PermissionEffects, RoleEffects]),
-		StoreModule.forRoot(reducers, {metaReducers}),
+		StoreModule.forRoot(reducers, { metaReducers }),
 		EffectsModule.forRoot([]),
-		StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
+		StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
 		StoreDevtoolsModule.instrument(),
 		AuthModule.forRoot(),
 		PagesModule,
@@ -160,13 +181,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 		MatTabsModule,
 		MatTooltipModule,
 		MatDialogModule,
-		MatChipsModule,
-
-	]
-	,entryComponents:[
-		NewApplicaitonComponent
-
+		MatChipsModule
 	]
 })
+
 export class ThemeModule {
 }

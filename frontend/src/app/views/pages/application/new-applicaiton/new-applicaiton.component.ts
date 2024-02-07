@@ -8,13 +8,15 @@ import { AppState } from '../../../../core/reducers';
 import { currentUser, User, Login, UserRequested } from '../../../../core/auth';
 import { Store, select } from '@ngrx/store';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { MatAutocomplete, MatAutocompleteSelectedEvent, MatChipInputEvent, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {  MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { startWith, map } from 'rxjs/operators';
 // import { environment } from './../../../../../environments/environment';
 import * as environment from '../../../../../assets/app-config.json';
 
 import { ApplicaitonService } from '../../../../core/application/applicaiton.service';
 import { LayoutUtilsService, MessageType } from '../../../../core/_base/crud';
+import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'kt-new-applicaiton',
