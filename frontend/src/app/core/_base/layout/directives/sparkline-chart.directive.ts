@@ -1,7 +1,7 @@
 // Angular
 import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 // Chart
-import { Chart } from 'chart.js/dist/Chart.min.js';
+import { Chart } from 'chart.js/auto';
 // LayoutConfig
 import { LayoutConfigService } from '../services/layout-config.service';
 
@@ -67,6 +67,7 @@ export class SparklineChartDirective implements AfterViewInit {
 		fill = (typeof fill !== 'undefined') ? fill : false;
 		tooltip = (typeof tooltip !== 'undefined') ? tooltip : false;
 
+		//TODO: Change this Chart based on new Format.
 		const config = {
 			type: 'line',
 			data: {
@@ -78,10 +79,10 @@ export class SparklineChartDirective implements AfterViewInit {
 
 					pointHoverRadius: 4,
 					pointHoverBorderWidth: 12,
-					pointBackgroundColor: Chart.helpers.color('#000000').alpha(0).rgbString(),
-					pointBorderColor: Chart.helpers.color('#000000').alpha(0).rgbString(),
+					pointBackgroundColor: "rgba(0,0,0,0)",
+					pointBorderColor: "rgba(0,0,0,0)",
 					pointHoverBackgroundColor: this.layoutConfigService.getConfig('colors.state.danger'),
-					pointHoverBorderColor: Chart.helpers.color('#000000').alpha(0.1).rgbString(),
+					pointHoverBorderColor: "rgba(0,0,0,0.1)",
 					fill: false,
 					data: data,
 				}]
