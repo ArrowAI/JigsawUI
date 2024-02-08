@@ -1,82 +1,44 @@
-function define(name, value) {
-  Object.defineProperty(exports, name, {
-    value: process.env[name] || value,
-    enumerable: true,
-  });
-}
-var nodeEnv = process.env.GITLAB_ENVIRONMENT_NAME || "production", mongoUser = "", mongoPassword = "";
-define("SERVER_ENV", nodeEnv);
+// config.js
+require('dotenv').config();
 
-if (nodeEnv == "local") {
-  
-  define("INTERACTION_ENGINE", "https://interaction.arrowai.in");
-  define("REDIS_URL_HOST", "arrowai.redis.cache.windows.net");
-  define("REDIS_URL_PORT", "6379");
-  define("REDIS_PASS", "");
-  define("DB_CONNECTION_STRING","");
-  define("DB_CONNECTION_USER", "arrowsldb");
-  define("DB_CONNECTION_PASSWORD","");
-  define("EVENT_SERVER", "https://event.arrowai.in");
-  define("DB_CONNECTION_STRING_FULL","");
-  define("EVENT_SERVER", "https://event.arrowai.in");
-  define("CAMPAIGN_NAMESPACE", "campaign");
-  define("DATABASE_NAME", "platform_production");
-  define("CLOUD_PROJECTID", "arrowai-kubernetes");
-  define("BIGQUERY_DATASET", "arrowaiproduction");
-  define("MONGO_DB","");
-  define("MONGO_USER", "arrowcosmodb");
-  define("MONGO_DB_NAME", "platform_production");
-  define("MONGO_PASS","");
-  define("CLOUD_STORAGE_URL","https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net");
+const INTERACTION_ENGINE = process.env.INTERACTION_ENGINE || 'https://interaction.arrowai.in';
+const EVENT_SERVER = process.env.EVENT_SERVER || 'https://event.arrowai.in';
+const REDIS_URL_HOST = process.env.REDIS_URL_HOST || 'redis.svc.cluster.local';
+const REDIS_URL_PORT = process.env.REDIS_URL_PORT || '6379';
+const REDIS_PASS = process.env.REDIS_PASS || '';
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || '';
+const DB_CONNECTION_USER = process.env.DB_CONNECTION_USER || 'webmaster';
+const DB_CONNECTION_PASSWORD = process.env.DB_CONNECTION_PASSWORD || '';
+const DB_CONNECTION_STRING_FULL = process.env.DB_CONNECTION_STRING_FULL || '';
+const DATABASE_NAME = process.env.DATABASE_NAME || 'platform_staging';
+const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'platform_staging';
+const MONGO_DB = process.env.MONGO_DB || '';
+const MONGO_USER = process.env.MONGO_USER || 'webmaster';
+const MONGO_PASS = process.env.MONGO_PASS || '';
+const CAMPAIGN_NAMESPACE = process.env.CAMPAIGN_NAMESPACE || 'campaign-staging';
+const CLOUD_PROJECTID = process.env.CLOUD_PROJECTID || 'arrowai-kubernetes';
+const BIGQUERY_DATASET = process.env.BIGQUERY_DATASET || 'arrowaistaging';
+const CLOUD_STORAGE_URL = process.env.CLOUD_STORAGE_URL || 'https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net';
 
-} else if (nodeEnv =="staging") {
-  define("INTERACTION_ENGINE", "https://interaction-staging.arrowai.in");
-  define("REDIS_URL_HOST", "arrowai.redis.cache.windows.net");
-  define("REDIS_URL_PORT", "6379");
-  define("REDIS_PASS", "");
-  define("DB_CONNECTION_STRING","");
-  define("DB_CONNECTION_USER", "arrowaisldev");
-  define("DB_CONNECTION_PASSWORD","");
-  define("DB_CONNECTION_STRING_FULL","");
-  define("EVENT_SERVER", "https://event.arrowai.in");
-  define("CAMPAIGN_NAMESPACE", "campaign-staging");
-  define("DATABASE_NAME", "platform_staging");
-  define("CLOUD_PROJECTID", "arrowai-kubernetes");
-  define("BIGQUERY_DATASET", "arrowaistaging");
-  define("MONGO_DB_NAME", "platform_staging");
-  define("MONGO_DB","");
-  define("MONGO_USER", "arrowcosmodb");
-  define("MONGO_PASS","");
-  define("CLOUD_STORAGE_URL","https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net");
+//
+module.exports = {
+  INTERACTION_ENGINE,
+  EVENT_SERVER,
+  REDIS_URL_HOST,
+  REDIS_URL_PORT,
+  REDIS_PASS,
+  DB_CONNECTION_STRING,
+  DB_CONNECTION_USER,
+  DB_CONNECTION_PASSWORD,
+  DB_CONNECTION_STRING_FULL,
+  DATABASE_NAME,
+  MONGO_DB_NAME,
+  MONGO_DB,
+  MONGO_USER,
+  MONGO_PASS,
+  CAMPAIGN_NAMESPACE,
+  CLOUD_PROJECTID,
+  BIGQUERY_DATASET,
+  CLOUD_STORAGE_URL
 
-} else if (nodeEnv =="production") {
-
-  //Peer Server Urls
-  define("INTERACTION_ENGINE", "https://interaction-staging.arrowai.in");
-  define("EVENT_SERVER", "https://event-staging.arrowai.in");
-  
-  // Redis Data
-  define("REDIS_URL_HOST", "redis.svc.cluster.local");
-  define("REDIS_URL_PORT", "6379");
-  define("REDIS_PASS", "1234");
-
-  // MongoDb Connection
-  define("DB_CONNECTION_STRING", "" );
-  define("DB_CONNECTION_USER", "webmaster");
-  define("DB_CONNECTION_PASSWORD","");
-  define("DB_CONNECTION_STRING_FULL", "" );
-  define("DATABASE_NAME", "platform_staging");
-
-  // Chat Storage
-  define("MONGO_DB_NAME", "platform_staging");
-  define("MONGO_DB", "");
-  define("MONGO_USER", "webmaster");
-  define("MONGO_PASS","");
-
-  define("CAMPAIGN_NAMESPACE", "campaign-staging");
-
-  define("CLOUD_PROJECTID", "arrowai-kubernetes");
-  define("BIGQUERY_DATASET", "arrowaistaging");
-
-  define("CLOUD_STORAGE_URL","https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net");
 }

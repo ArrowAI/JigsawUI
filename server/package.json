@@ -19,6 +19,7 @@
         "cron-parser": "^3.5.0",
         "debug": "~2.6.9",
         "dialogflow": "^1.2.0",
+        "dotenv": "^16.4.1",
         "express": "~4.16.4",
         "http-errors": "^1.8.1",
         "jsonwebtoken": "^8.5.1",
