@@ -24,11 +24,37 @@ services:
       MONGO_USER: root
       MONGO_PASS: mongo
 
+  server:
+    build:
+      context: ../server/
+    networks:
+      - arrowaiNetwork
+    environment:
+      EVENT_SERVER: https://event-staging.arrowai.in
+      REDIS_URL_HOST: redis
+      REDIS_URL_PORT: 6379
+      REDIS_PASS: 
+      DB_CONNECTION_STRING: mongodb
+      DB_CONNECTION_USER: root
+      DB_CONNECTION_PASSWORD: mongo
+      DB_CONNECTION_STRING_FULL: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
+      DATABASE_NAME: arrowaidb
+      MONGO_DB_NAME: arrowaidb
+      MONGO_DB: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
+      MONGO_USER: root
+      MONGO_PASS: mongo
+      CLOUD_STORAGE_URL: https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net
+      PORT: 8080
+    ports:
+      - "8080:8080"
+
+
   mongodb:
     image: mongo:latest
     restart: unless-stopped
     volumes:
       - mongodb-data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: mongo
@@ -36,7 +62,7 @@ services:
     ports:
       - "27017:27017"
     networks:
-      - arrowaiNetwork
+      - arrowaiNetwork      
   
   redis:
     image: redis:latest
