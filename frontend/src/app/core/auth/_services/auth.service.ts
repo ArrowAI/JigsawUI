@@ -55,11 +55,11 @@ export class AuthService {
 	}
 	// Authentication/Authorization
 	login(email: string, password: string,domin): Observable<User> {
-		return this.http.post<User>(`${environment.CLAUD_STORAGE_URL}/app_usermanager_authenticateuser`, { email, password,domin });
+		return this.http.post<User>(`${environment.API_SERVER}/users/authenticateUser`, { email, password,domin });
 	}
 	socialLogin(user: any): Observable<any> {
 		user.isSocial = true;
-		return this.http.post<User>(`${environment.CLAUD_STORAGE_URL}/app_usermanager_authenticateuser`, user);
+		return this.http.post<User>(`${environment.API_SERVER}/users/socialLogin`, user);
 	}
 
 	getUserByToken(): Observable<any> {
@@ -86,7 +86,7 @@ export class AuthService {
 		const httpHeaders = new HttpHeaders();
 		httpHeaders.set('Content-Type', 'application/json');
 		console.log('user', user);
-		return this.http.post<User>(`${environment.CLAUD_STORAGE_URL}/app_usermanager_adduser`, {
+		return this.http.post<User>(`${environment.API_SERVER}/users`, {
 			action: 'adduser',
 			name: user.username,
 			email: user.email,
