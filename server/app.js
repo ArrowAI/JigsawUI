@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.use('/', indexRouter);
-app.use('/users', verifyToken, usersRouter);
+app.use('/users', usersRouter);
 app.use('/application', verifyToken, applicationRouter);
 app.use('/bots', verifyToken, botsRouter);
 app.use('/campaigns', verifyToken, campaignRouter);
