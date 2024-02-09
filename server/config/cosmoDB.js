@@ -1,15 +1,10 @@
 var constants = require("./constants");
-const { MONGO_DB, MONGO_USER, MONGO_PASS } = constants
+const { MONGO_DB_URL, MONGO_USER, MONGO_PASS } = constants
 const Mongoose = require("mongoose").Mongoose;
 console.log("connecting to cosmo db");
 let cosmoMongoose = new Mongoose()
-
  cosmoMongoose.set('useCreateIndex', true);
-cosmoMongoose.connect(MONGO_DB, {
-    auth: {
-        user: MONGO_USER,
-        password: MONGO_PASS,
-    },
+cosmoMongoose.connect(MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     retryWrites: false

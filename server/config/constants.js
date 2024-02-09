@@ -12,7 +12,7 @@ const DB_CONNECTION_PASSWORD = process.env.DB_CONNECTION_PASSWORD || '';
 const DB_CONNECTION_STRING_FULL = process.env.DB_CONNECTION_STRING_FULL || '';
 const DATABASE_NAME = process.env.DATABASE_NAME || 'platform_staging';
 const MONGO_DB_NAME = process.env.MONGO_DB_NAME || 'platform_staging';
-const MONGO_DB = process.env.MONGO_DB || '';
+const MONGO_DB_URL = process.env.MONGO_DB_URL || '';
 const MONGO_USER = process.env.MONGO_USER || 'webmaster';
 const MONGO_PASS = process.env.MONGO_PASS || '';
 const CAMPAIGN_NAMESPACE = process.env.CAMPAIGN_NAMESPACE || 'campaign-staging';
@@ -33,7 +33,7 @@ module.exports = {
   DB_CONNECTION_STRING_FULL,
   DATABASE_NAME,
   MONGO_DB_NAME,
-  MONGO_DB,
+  MONGO_DB_URL,
   MONGO_USER,
   MONGO_PASS,
   CAMPAIGN_NAMESPACE,

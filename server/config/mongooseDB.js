@@ -1,17 +1,17 @@
 const constants = require("./constants");
 const Mongoose = require("mongoose").Mongoose;
-console.log("connecting to mongo db",constants.DB_CONNECTION_STRING);
+console.log("connecting to mongo db",constants.DB_CONNECTION_STRING_FULL);
 let mainMongoose = new Mongoose();
 mainMongoose.set('useNewUrlParser', true);
 mainMongoose.set('useFindAndModify', false);
 mainMongoose.set('useCreateIndex', true);
 mainMongoose.set('debug', true);
 mainMongoose.connect(
-    constants.DB_CONNECTION_STRING, {
-        auth: {
-            username:constants.DB_CONNECTION_USER,
-            password: constants.DB_CONNECTION_PASSWORD
-          },
+    constants.DB_CONNECTION_STRING_FULL, {
+        // auth: {
+        //     username:constants.DB_CONNECTION_USER,
+        //     password: constants.DB_CONNECTION_PASSWORD
+        //   },
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useUnifiedTopology: true
