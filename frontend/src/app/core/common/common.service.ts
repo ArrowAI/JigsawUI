@@ -407,6 +407,4 @@ export class CommonService {
     return this.http.get<any>(`${environment.INTERACTION_ENGINE}/notification/${applicationId}`);
 
   }
-
-
 }

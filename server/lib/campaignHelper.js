@@ -222,8 +222,7 @@ campaignHelper.prototype.getCampaignById = function () {
     return defer.promise;
 };
 campaignHelper.prototype.processCampaign = function () {
-
-
+    
 }
 
 module.exports = campaignHelper;
