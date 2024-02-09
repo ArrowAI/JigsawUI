@@ -23,30 +23,32 @@ services:
       MONGO_DB_NAME: arrowaidb
       MONGO_USER: root
       MONGO_PASS: mongo
-
-  server:
-    build:
-      context: ../server/
-    networks:
-      - arrowaiNetwork
-    environment:
-      EVENT_SERVER: https://event-staging.arrowai.in
-      REDIS_URL_HOST: redis
-      REDIS_URL_PORT: 6379
-      REDIS_PASS: 
-      DB_CONNECTION_STRING: mongodb
-      DB_CONNECTION_USER: root
-      DB_CONNECTION_PASSWORD: mongo
-      DB_CONNECTION_STRING_FULL: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
-      DATABASE_NAME: arrowaidb
-      MONGO_DB_NAME: arrowaidb
-      MONGO_DB: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
-      MONGO_USER: root
-      MONGO_PASS: mongo
-      CLOUD_STORAGE_URL: https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net
+      API_SERVER: http://localhost:8080
       PORT: 8080
-    ports:
-      - "8080:8080"
+
+  # server:
+  #   build:
+  #     context: ../server/
+  #   networks:
+  #     - arrowaiNetwork
+  #   environment:
+  #     EVENT_SERVER: https://event-staging.arrowai.in
+  #     REDIS_URL_HOST: redis
+  #     REDIS_URL_PORT: 6379
+  #     REDIS_PASS: 
+  #     DB_CONNECTION_STRING: mongodb
+  #     DB_CONNECTION_USER: root
+  #     DB_CONNECTION_PASSWORD: mongo
+  #     DB_CONNECTION_STRING_FULL: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
+  #     DATABASE_NAME: arrowaidb
+  #     MONGO_DB_NAME: arrowaidb
+  #     MONGO_DB: mongodb
+  #     MONGO_USER: root
+  #     MONGO_PASS: mongo
+  #     CLOUD_STORAGE_URL: https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net
+  #     PORT: 8080
+  #   ports:
+  #     - "8080:8080"
 
 
   mongodb:
