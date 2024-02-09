@@ -190,12 +190,14 @@ let tasks = {
         return defer.promise;
     },
     getApplicationConfig: function (key, userId) {
+        console.log("key is", key,userId);
         return new Promise((resolve, reject) => {
             try {
                 MongoClient.connect(constants.DB_CONNECTION_STRING_FULL, {    
                     useNewUrlParser: true, 
                     useUnifiedTopology: true})
                     .then(client => {
+                        console.log("Connected successfully to server");
                         const db = client.db(constants.DATABASE_NAME)
                         const Application = db.collection('application');
                         Application.find({ users: { "$elemMatch": { user_id: userId } } }).toArray((err, applicationDef) => {
@@ -230,7 +232,7 @@ let tasks = {
                     })
 
             } catch (err) {
-                console.log(err);
+                console.log("error in connection mongoclient");
                 reject({
                     error: err
                 });

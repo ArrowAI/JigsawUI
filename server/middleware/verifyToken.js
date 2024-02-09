@@ -19,17 +19,22 @@ function verifyToken(req, res, next) {
   //   console.log(req.body.userId);
   //   next();
   // });
-  let decodedString;
-  if (typeof Buffer.from === "function") {
-    // Node  5.10+
-    decodedString = Buffer.from(token, "base64").toString(); // Decoded string
-  } else {
-    // older Node versions
-    decodedString = new Buffer(token, "base64").toString(); // Decoded string
-    req.body.userId = decodedString;
-    console.log(req.body.userId);
-    next();
+  try {
+    let decodedString;
+    if (typeof Buffer.from === "function") {
+      // Node  5.10+
+      decodedString = Buffer.from(token, "base64").toString(); // Decoded string
+    } else {
+      // older Node versions
+      decodedString = new Buffer(token, "base64").toString(); // Decoded string
+      req.body.userId = decodedString;
+      console.log(req.body.userId);
+      next();
+    }
+  } catch (error) {
+    next(error);
   }
+ 
 
 }
 

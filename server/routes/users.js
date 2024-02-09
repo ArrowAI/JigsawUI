@@ -113,7 +113,7 @@ router.get('/authenticateUser', function(req, res, next) {
 
 });
 router.get('/userConfig',verifyToken, function(req, res, next) {
-    // console.log(req.headers);
+    console.log(req.headers);
     let sessionid = false,
         key = false;
     if (req.headers.hasOwnProperty("key")) {
