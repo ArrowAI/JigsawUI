@@ -4,7 +4,7 @@ var config = {
 }; // get our config file
 
 function verifyToken(req, res, next) {
-  // console.log(req.headers.key);
+  console.log(req.headers.key);
   // check header or url parameters or post parameters for token
   var token = req.headers['key'];
   if (!token)
@@ -27,12 +27,17 @@ function verifyToken(req, res, next) {
     } else {
       // older Node versions
       decodedString = new Buffer(token, "base64").toString(); // Decoded string
-      req.body.userId = decodedString;
-      console.log(req.body.userId);
-      next();
+    
     }
+
+   //split decoded string before +
+    decodedString = decodedString.split("+")[0];
+    req.body.userId = decodedString;
+    console.log(req.body.userId);
+    next();
   } catch (error) {
-    next(error);
+    console.log("error in token verification",eroor)
+    res.status(500).send({ auth: false, message: 'Error in token verification. No token provided.' });
   }
  
 

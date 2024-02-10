@@ -1,0 +1,63 @@
+<div class="kt-portlet" >
+    <div class="kt-portlet__head kt-portlet__head__custom">
+      <div class="kt-portlet__head-label">
+        <h3 class="kt-portlet__head-title">Module Management</h3>
+      </div>
+  
+   
+    </div>
+    <div class="kt-portlet__body">
+  
+      <div class="kt-portlet__body-progress">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </div>
+  
+      <div class="row" style="margin-bottom: 200px;">
+        <div class="col-lg-12">
+          <div style="
+          margin-top: 13px;
+      " class="row shuffle ">
+            <div style="margin-top: 25px; cursor: pointer; width: 100%!important;" *ngFor="let module of modules"
+              class="col-lg-3 col-md-6 ">
+              <a href="javascript:void(0)">
+    
+                <div class="d-flex key-feature align-items-center p-3 rounded simple_shadow">
+                  <i [ngClass]="{'flaticon-infinity':module.menuIcon==''}" class="{{module.menuIcon}} fa-2x "></i>
+                  <!-- <img src="images/job/Circleci.svg" class="avatar avatar-ex-sm" alt=""> -->
+                  <div class="flex-1 ms-3" style="
+                          margin-left: 10px; width: 100%;
+                      ">
+                    <h4 class="title mb-0 text-dark">{{module.menuName}}</h4>
+                    <!-- <a href="javascript:void(0)" class="badge badge-link bg-success">Channel</a> -->
+                    <p class="text-muted mb-0 description">
+                      {{module.description!=''?module.description:'module description here'}}</p>
+                      <div class="pull-right">
+                        <a *ngIf="module.isInstalled; else elseBlock" disabled="true" href="JavaScript:Void(0)"
+                          class="btn btn-default  btn-sm font-weight-bold py-2 px-2 pull-right">{{module.isInstalled?'installed':'install'}}</a>
+                        <ng-template #elseBlock>
+                          <a href="JavaScript:Void(0)" (click)="addModule(module)"
+                            class="btn btn-primary btn-sm font-weight-bold py-2 px-2 pull-right">{{module.isInstalled?'installed':'install'}}</a>
+            
+                        </ng-template>
+                      </div>
+                  </div>
+    
+                </div>
+              </a>
+            
+    
+            </div>
+            <!--end col-->
+    
+    
+          </div>
+        </div>
+      </div>
+  
+  
+    </div>
+  </div>`
+  
+
+
+

@@ -26,9 +26,9 @@ router.post('/', function(req, res, next) {
             let imageUrl = "";
             let public = 0
             let applications = new applicationsList(newUser._id, "")
-            applications.createDefaultBotCopy().then(defaultBotConfig => {
+            // applications.createDefaultBotCopy().then(defaultBotConfig => {
                 try {
-                    applications.addNewAppForUserId(name, description, imageUrl, "", [name], public, newUser._id, defaultBotConfig.triggerData, defaultBotConfig.botData,req.installedModules).then(appDetail => {
+                    applications.addNewAppForUserId(name, description, imageUrl, "", [name], public, newUser._id,{},{},req.installedModules).then(appDetail => {
                         let sorrySentences = (appDetail.hasOwnProperty("sorrySentence")) ? appDetail.sorrySentence : [];
                         console.log(appDetail)
                     })
@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
                     console.log(error)
                 }
 
-            })
+            // })
 
         })
     }

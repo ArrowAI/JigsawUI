@@ -109,8 +109,15 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 		this.store.pipe(select(currentUser)).subscribe(user => {
 			this.user = user;
 			console.log("currunt user is ",this.user)
-			if (!!user)
+			if (!!user && user.activeApplication && user.activeApplication['installedModules'].length > 0) {
 				this.menuAsideService.loadMenu(user['activeApplication']['installedModules'])
+
+			}
+			else {
+				// alert ("no module installed")
+				this.menuAsideService.loadMenu()
+
+			}
 		})
 		this.currentRouteUrl = this.router.url.split(/[?#]/)[0];
 		this.router.events
@@ -140,7 +147,7 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 				console.log(newUser);
 
 				this.store.dispatch(new UserLoaded({ user: newUser }));
-				this.router.navigateByUrl("/external/module/dashboard");
+				// this.router.navigateByUrl("/external/module/dashboard");
 			} catch (error) {
 
 			}

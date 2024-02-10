@@ -11,12 +11,12 @@ const routes: Routes = [
 	{
 		path: '',
 		component: BaseComponent,
-		canActivate: [AuthGuard],
+		// canActivate: [AuthGuard],
 		children: [
-			// {
-			// 	path: 'home',
-			// 	loadChildren: () => import('./views/pages/dashboard/dashboard.module').then(m => m.DashboardModule)
-			// },
+			{
+				path: 'marketplace',
+				loadChildren: () => import('./views/uimodules/ui-module/ui-module.module').then(m => m.UiModuleModule)
+			},
 			// {
 			// 	path: 'customeApps',
 			// 	loadChildren: () => import('./views/pages/custom-apps/custom-app.module').then(m => m.CustomAppModule)

@@ -291,7 +291,7 @@ export class ModuleComponent implements OnInit, AfterViewInit, OnDestroy {
 		} catch (error) { }
 	}
 	valueChanged(e) {
-		alert();
+		// alert();
 	}
 	ngAfterViewInit() { }
 	ngOnDestroy() {

@@ -24,55 +24,55 @@ export class MenuConfig {
 			self: {},
 			items: [
 				{ section: 'Home' },
-				{
-					title: 'Dashboard',
-					root: true,
-					icon: 'flaticon2-architecture-and-city',
-					page: '/external/module/dashboard',
-					bullet: 'dot',
-					id: 1,
-					type:"default"
-				},
+				// {
+				// 	title: 'Dashboard',
+				// 	root: true,
+				// 	icon: 'flaticon2-architecture-and-city',
+				// 	page: '/external/module/dashboard',
+				// 	bullet: 'dot',
+				// 	id: 1,
+				// 	type:"default"
+				// },
 				// {section: 'Converstions'},
-				{
-					id: 2,
-					title: 'Chat',
-					root: true,
-					icon: 'flaticon2-chat-1',
-					page: '/external/module/chat',
+				// {
+				// 	id: 2,
+				// 	title: 'Chat',
+				// 	root: true,
+				// 	icon: 'flaticon2-chat-1',
+				// 	page: '/external/module/chat',
 
-					bullet: 'dot',
-					type:"default"
-				},
-				{
-					id: 3,
-					title: 'Bots',
-					root: true,
-					icon: 'fas fa-robot',
-					page: '/external/module/bots',
-					// page: '/core/module/employee',
-					bullet: 'dot',
-					type:"default"
-				},
-				{
-					id: 5,
-					title: 'Users',
-					root: true,
-					icon: 'flaticon2-avatar',
-					page: '/external/module/customer',
+				// 	bullet: 'dot',
+				// 	type:"default"
+				// },
+				// {
+				// 	id: 3,
+				// 	title: 'Bots',
+				// 	root: true,
+				// 	icon: 'fas fa-robot',
+				// 	page: '/external/module/bots',
+				// 	// page: '/core/module/employee',
+				// 	bullet: 'dot',
+				// 	type:"default"
+				// },
+				// {
+				// 	id: 5,
+				// 	title: 'Users',
+				// 	root: true,
+				// 	icon: 'flaticon2-avatar',
+				// 	page: '/external/module/customer',
 
-					bullet: 'dot',
-					type:"default"
-				},
-				{
-					id: 6,
-					title: 'Campaign',
-					root: true,
-					icon: 'flaticon2-rocket-1',
-					page: '/external/module/broadcast',
-					bullet: 'dot',
-					type:"default"
-				},
+				// 	bullet: 'dot',
+				// 	type:"default"
+				// },
+				// {
+				// 	id: 6,
+				// 	title: 'Campaign',
+				// 	root: true,
+				// 	icon: 'flaticon2-rocket-1',
+				// 	page: '/external/module/broadcast',
+				// 	bullet: 'dot',
+				// 	type:"default"
+				// },
 
 				// {
 				// 	id: 8,
@@ -191,29 +191,29 @@ export class MenuConfig {
 				
 				{
 					id: 4,
-					title: 'Integrations',
+					title: 'Module Marketplace',
 					root: true,
 					icon: 'fab fa-steam-symbol',
-					page: '/external/module/integrations',
+					page: '/marketplace',
 					bullet: 'dot',
 					type:"default"
 				},
-				{
-					id: 'default',
-					title: 'Dev', // shecheduler,code,table
-					root: true,
-					icon: 'far fa-file-code',
-					page: '/external/module/dev',
-					bullet: 'dot',
-				},
-				{
-					id: 'default',
-					title: 'Settings',
-					root: true,
-					icon: 'flaticon-cogwheel-2',
-					page: '/external/module/settings',
-					bullet: 'dot',
-				}
+				// {
+				// 	id: 'default',
+				// 	title: 'Dev', // shecheduler,code,table
+				// 	root: true,
+				// 	icon: 'far fa-file-code',
+				// 	page: '/external/module/dev',
+				// 	bullet: 'dot',
+				// },
+				// {
+				// 	id: 'default',
+				// 	title: 'Settings',
+				// 	root: true,
+				// 	icon: 'flaticon-cogwheel-2',
+				// 	page: '/external/module/settings',
+				// 	bullet: 'dot',
+				// }
 
 			]
 		},

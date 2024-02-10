@@ -7,7 +7,7 @@ export class AppConfigService {
 
    constructor (private injector: Injector) { }
    loadAppConfig() {
-    console.log("loadAppConfig Called")
+    // console.log("loadAppConfig Called")
        let http = this.injector.get(HttpClient);
        return http.get('/assets/app-config.json')
        .toPromise()

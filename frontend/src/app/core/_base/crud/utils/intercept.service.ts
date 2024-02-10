@@ -74,7 +74,7 @@ export class InterceptService implements HttpInterceptor {
 				},
 				error => {
 					if (url.indexOf(environment.API_SERVER+"/users/userConfig")>=0 && method=="GET")
-					this.store.dispatch(new Logout());
+					// this.store.dispatch(new Logout());
 					console.error(error);
 					
 				}

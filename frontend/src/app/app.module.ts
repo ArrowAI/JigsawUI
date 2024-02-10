@@ -86,6 +86,7 @@ import { AngularFireMessaging, AngularFireMessagingModule } from "@angular/fire/
 
 import { AppConfigService } from "./app-config.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+// import { UiModuleComponent } from './views/uimodules/ui-module/ui-module.component';
 
 // tslint:disable-next-line:class-name
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {

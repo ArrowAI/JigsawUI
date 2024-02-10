@@ -87,7 +87,7 @@ export class BaseComponent implements OnInit, OnDestroy {
 		this.store.pipe(select(currentUser)).subscribe(user => {
 			if (!!user) {
 				this.activeApplicationId = user.activeApplication._id;
-				this.router.navigateByUrl(`/external/module/dashboard`)
+				// this.router.navigateByUrl(`/external/module/dashboard`)
 
 			}
 		})

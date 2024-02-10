@@ -30,6 +30,7 @@ export class MenuAsideService {
 		const menuItems: any[] = objectPath.get(this.menuConfigService.getMenus(), 'aside.items');
 		const installedMemu = [];
 		
+		console.log(menuItems)
 		installedModule.forEach(module => {
 			if(module!=null)
 			if(module.type=="application")

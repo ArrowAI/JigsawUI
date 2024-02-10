@@ -76,7 +76,7 @@ export class AuthEffects {
             mergeMap(([action, _isUserLoaded]) => this.auth.getUserByToken()),
             tap(_user => {
                 console.log("user config is",_user);
-                if (_user.auth && _user.auth == false) {
+                if (!_user.accessToken) {
                     this.store.dispatch(new Logout());
                 } else {
                     let user = JSON.parse(localStorage.getItem("activeUser"))
