@@ -20,6 +20,7 @@ services:
       REDIS_URL_HOST: redis
       REDIS_URL_PORT: 6379
       MONGO_DB: mongodb
+      MONGO_DB_URL: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
       MONGO_DB_NAME: arrowaidb
       MONGO_USER: root
       MONGO_PASS: mongo
@@ -43,6 +44,7 @@ services:
   #     DATABASE_NAME: arrowaidb
   #     MONGO_DB_NAME: arrowaidb
   #     MONGO_DB: mongodb
+  #     MONGO_DB_URL: mongodb://root:mongo@mongodb/arrowaidb?authSource=admin
   #     MONGO_USER: root
   #     MONGO_PASS: mongo
   #     CLOUD_STORAGE_URL: https://asia-southeast1-arrowai-kubernetes.cloudfunctions.net
